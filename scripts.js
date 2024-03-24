@@ -101,6 +101,8 @@ function pkmnLoad() {
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
           </div>
           <h2>${move.name.replace("-", " ")}</h2>
+          <p><span>Power: ${move.power} </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${move.damage_class.name}.png"></span><span>Accuracy: ${move.accuracy}</span></p>
+          <p><span style="text-transform: none !important">${move.effect_entries[0].short_effect}</span></p>
         </li>`);
       });
     }
@@ -139,6 +141,8 @@ function reloadMoves() {
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
           </div>
           <h2>${move.name.replace("-", " ")}</h2>
+          <p><span>Power: ${move.power} </span><span> <img class="cat" src="https://raw.githubusercontent.com/Wither19/dex/main/${move.damage_class.name}.png"></span><span>Accuracy: ${move.accuracy}</span></p>
+          <p><span style="text-transform: none !important">${move.effect_entries[0].short_effect}</span></p>
         </li>`);
       });
     }
