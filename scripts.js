@@ -32,8 +32,10 @@ function pkmnSelect(event) {
 
   p = event.currentTarget.id;
   $("#" + p).addClass("hl");
+  $("#" + p).focus();
+  document.querySelector(".entry:focus").scrollIntoView();
   $(":not(#" + p + ")").removeClass("hl");
-  pkmnLoad();
+  setTimeout(500, pkmnLoad);
 }
 
 function pkmnLoad() {
@@ -72,7 +74,7 @@ function pkmnLoad() {
     $(".height").html((data.height / 3.048).toFixed() + "\'");
     $(".weight").html((data.weight / 4.536).toFixed() + " lbs.")
     $(".types").html("");
-    $(".abilities").html(``);
+    $(".abilities").html(`<h2>Abilities</h2>`);
     for (let t = 0; t <= data.types.length; t++) {
       $(".types").append(`<div class="icon ${data.types[t].type.name}"><img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${data.types[t].type.name}.svg"></div>`);
     }
@@ -81,19 +83,35 @@ function pkmnLoad() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
     for (let a = 0; a <= data.abilities.length; a++) {
       if (data.abilities[a].is_hidden === true) {
-       $(".abilities").append(`<a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}"><span style="font-weight: 900">(H) </span>${data.abilities[a].ability.name.replace("-", " ")}</a><br>`);
+       $(".abilities").append(`<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}"><span style="font-weight: 900">(H) </span>${data.abilities[a].ability.name.replace("-", " ")}</a>`);
       }
       else {
-       $(".abilities").append(`<a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}">${data.abilities[a].ability.name.replace("-", " ")}</a><br>`);
+       $(".abilities").append(`<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}">${data.abilities[a].ability.name.replace("-", " ")}</a>`);
       }
    }
+  });
+
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+    for (let m = 0; m < 4; m++) {
+      let r = Math.floor(Math.random() * data.moves.length);
+      fetch(data.moves[r].move.url).then(moveR => moveR.json()).then(move => {
+        $(".moves").append(`
+        <li class="move ${move.type.name}">
+          <div class="icon ${move.type.name}">
+              <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
+          </div>
+          <h2>${move.name.replace("-", " ")}</h2>
+        </li>`);
+      });
+    }
+    $(".moves").html("");
   });
    
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
       for (let f = 0; f <= data.flavor_text_entries.length; f++) {
           let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
           if (fLang === 0) {
-            $(".lore").html(`<span>${data.flavor_text_entries[f].flavor_text}</span><br><br><sub style="text-transform: capitalize;">Pokemon ${data.flavor_text_entries[f].version.name.replace("-", " ")}</sub>`);
+            $(".lore").html(`<span>${data.flavor_text_entries[f].flavor_text}</span><br><br><sub style="text-transform: capitalize;">Pokémon ${data.flavor_text_entries[f].version.name.replace("-", " ")}</sub>`);
           }
       }
   });
@@ -107,6 +125,26 @@ for (let g = 0; g <= data.genera.length; g++) {
 }
 });
 }
+
+function reloadMoves() {
+  $(".moves").html("");
+  window.scrollTo(0, 1000);
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+    for (let m = 0; m < 4; m++) {
+      let r = Math.floor(Math.random() * data.moves.length);
+      fetch(data.moves[r].move.url).then(moveR => moveR.json()).then(move => {
+        $(".moves").append(`
+        <li class="move ${move.type.name}">
+          <div class="icon ${move.type.name}">
+              <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
+          </div>
+          <h2>${move.name.replace("-", " ")}</h2>
+        </li>`);
+      });
+    }
+  });
+}
+
 $(document).keydown(function(e) {
   if (e.key == "r") {
     p = Math.floor(Math.random() * 898 + 1);
