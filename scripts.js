@@ -1,224 +1,139 @@
-var i = 1;
+var i = 0;
+var p = 1;
 
-fetch(`https://pokeapi.co/api/v2/pokemon?limit=10228`).then(response => response.json()).then(data => {
-  let dexHead = document.createElement("h2");
-  dexHead.innerHTML = "National Pokédex";
-  dexHead.style.flexBasis = "100%";
-  dexHead.style.textAlign = "center";
-  dexHead.style.fontSize = "48px";
-  document.querySelector(".wrapper").appendChild(dexHead);
-  for (let i = 1; i <= 898; i++) {
-    let entry = document.createElement("div");
-    entry.setAttribute("id", i);
-    entry.setAttribute("tabindex", i)
-    entry.classList.add("entry");
-    entry.addEventListener("click", preSelect);
-    entry.addEventListener("click", showOrNah);
-    document.querySelector(".wrapper").appendChild(entry);
-    entry.innerHTML = `<img class="sprite" src="https://raw.githubusercontent.com/Wither19/sprites/master/sprites/pokemon/versions/generation-viii/icons/${i}.png"><br><span>${data.results[i - 1].name}</span>`;
-  }
-  setTimeout(vars, 1500);
+function get() {
+  fetch("https://pokeapi.co/api/v2/pokedex/1").then(response => response.json()).then(data => {
+    console.log(data);
+    for (let i = 0; i < 898; i++) {
+      const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
-  function vars() {
-    let varHead = document.createElement("h2");
-    varHead.innerHTML = "Variants";
-    varHead.style.flexBasis = "100%";
-    varHead.style.textAlign = "center";
-    varHead.style.fontSize = "48px";
-    document.querySelector(".wrapper").appendChild(varHead);
-    for (let v = 10001; v <= 10157; v++) {
-      let entry = document.createElement("div");
-      entry.setAttribute("id", v);
-      entry.setAttribute("tabindex", v)
-      entry.classList.add("entry");
-      entry.addEventListener("click", preSelect);
-      entry.addEventListener("click", showOrNah);
-      document.querySelector(".wrapper").appendChild(entry);
-      entry.innerHTML = `<img class="sprite" src="https://raw.githubusercontent.com/Wither19/sprites/master/sprites/pokemon/versions/generation-viii/icons/${v}.png"><br><span>${(data.results[v - 8976].name).replaceAll("-Mega", "<br><sub>(Mega)</sub>")}</span>`;
+      const spriteUrl = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/" + pkmnName + ".png";
 
-    }
-  }
-});
-
-function pkmnLoad(event) {
-  if (i < 1) {
-    i = 1;
-  } else if (i > 898 && i < 9999) {
-    i = 898;
-  }
-
-  fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(response => response.json()).then(data => {
-    var r = Math.floor(Math.random() * data.moves.length);
-
-    $("h1").html(`#${data.id} - ${data.name}`);
-
-    $("img.sprite.regular").attr("src", `https://raw.githubusercontent.com/Wither19/pokesprite/master/pokemon-gen8/regular/${data.name}.png`);
-
-    $("img.sprite.shiny").attr("src", `https://raw.githubusercontent.com/Wither19/pokesprite/master/pokemon-gen8/shiny/${data.name}.png`);
-
-    $("img.artwork").attr("src", data.sprites.other["official-artwork"].front_default);
-
-    $("img.artwork.shiny").attr("src", data.sprites.other["official-artwork"].front_shiny);
-
-    $(".stats").html("");
-    $(".abilities").html("");
-
-    $(".stats").append(`
-	  <span class="hp">HP: <span style="font-weight: bold;">${data.stats[0].base_stat}</span></span><br>
-      <span class="atk">Atk: <span style="font-weight: bold;">${data.stats[1].base_stat}</span></span><br>
-      <span class="def">Def: <span style="font-weight: bold;">${data.stats[3].base_stat}</span></span><br>
-      <span class="sp-atk">Sp-Atk: <span style="font-weight: bold;">${data.stats[2].base_stat}</span></span><br>
-      <span class="sp-def">Sp-Def: <span style="font-weight: bold;">${data.stats[4].base_stat}</span></span><br>
-      <span class="spd">Spd: <span style="font-weight: bold;">${data.stats[5].base_stat}</span></span>`);
-
-    $(".types").html("");
-
-    $(".types").prepend(`<span class="Type ${data.types[0].type.name}"><img src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${data.types[0].type.name}.svg">${data.types[0].type.name}</span>`);
-
-    $(".types").append(`<span class="Type ${data.types[1].type.name}"><img src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${data.types[1].type.name}.svg">${data.types[1].type.name}</span>`);
-
-    $(".abilities").html("");
-
-    $(".abilities").append(`
-	<span class="norm"><a title="View ${data.abilities[0].ability.name.replace("-", " ")} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[0].ability.name}" target="_blank">${data.abilities[0].ability.name.replace("-", " ")}</a></span>`);
-
-    $(".abilities").append(`
-	 / <span class="norm"><a title="View ${data.abilities[1].ability.name.replace("-", " ")} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[1].ability.name}" target="_blank">${data.abilities[1].ability.name.replace("-", " ")}</a></span>`);
-
-    $(".abilities").append(`
-	 / <span class="norm"><a title="View ${data.abilities[2].ability.name.replace("-", " ")} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[2].ability.name}" target="_blank">${data.abilities[2].ability.name.replace("-", " ")}</a></span>`);
-
-    $(".tidbits").html("");
-
-    $(".tidbits").append(`
-	<span class="height">${(data.height / 3.048).toFixed(2)} ft.</span> /
-	<span class="weight">${(data.weight / 4.536).toFixed(2)} lbs.</span>`);
-  });
-
-  fetch(`https://pokeapi.co/api/v2/pokemon-species/${i}`).then(response => response.json()).then(data => {
+      var newEntry = document.createElement("div");
 
 
-    $(".jp").html("");
 
-    $(".genus").html("");
-
-    $(".actual").html("");
-
-    $(".capture").html("");
-
-    let falseSwiped = ((data.capture_rate / 2.55) * 1.5).toFixed() + "%";
-
-    if (data.capture_rate <= 25) {
-      $(".capture").html(`Catch Rate: <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png">`);
-
-    } else if (data.capture_rate <= 84) {
-      $(".capture").html(`Catch Rate: <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png">`);
-    } else if (data.capture_rate <= 168) {
-      $(".capture").html(`Catch Rate: <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png">`);
-    } else if (data.capture_rate <= 255) {
-      $(".capture").html(`Catch Rate: <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">`);
-    }
-
-    $(".jp").html(data.names[0].name);
-
-    for (let f = 0; f <= data.flavor_text_entries.length; f++) {
-      var langMatch = data.flavor_text_entries[f].language.name.lastIndexOf("en");
-
-      if (langMatch == 0) {
-        $(".actual").html(`${data.flavor_text_entries[f].flavor_text}<br><br><sub>From Pokémon <span style="text-transform: capitalize;">${data.flavor_text_entries[f].version.name.replace("-", " ")}</span></sub>`);
-      }
-    }
-
-    for (let g = 0; g <= data.genera.length; g++) {
-      var genusMatch = data.genera[g].language.name.lastIndexOf("en");
-
-      if (genusMatch == 0) {
-        $(".genus").html(data.genera[g].genus);
-        console.log(genusMatch);
-      }
+      newEntry.classList.add("entry");
+      newEntry.setAttribute("id", i + 1);
+      newEntry.addEventListener("click", pkmnSelect);
+      newEntry.addEventListener("click", function() {
+              $(".container").removeClass("hide");
+      });
+      newEntry.innerHTML = `<img src="${spriteUrl}"><br><center><span>${pkmnName}</span></center>`;
+      document.querySelector("div.container").appendChild(newEntry);
     }
   });
-
 }
 
-function preSelect(event) {
-  i = event.currentTarget.id;
-  window.scroll(0, 65);
-  pkmnLoad(event);
-}
-
-$("i").click(function() {
-  $(".wrapper").toggleClass("shown");
-});
-
-document.querySelector("body").onkeydown = function(e) {
-  if (e.key == "p") {
-    e.stopPropagation();
-    $(".wrapper").toggleClass("shown");
-    window.scroll(0, 0);
-  } else if (e.which == 37) {
-    i--;
-    pkmnLoad();
-  } else if (e.which == 39) {
-    i++;
-    pkmnLoad();
-  } else if (e.key == "r") {
-    e.stopPropagation();
-    i = Math.floor(Math.random() * 898 + 1);
-    pkmnLoad();
-  } else if (e.key == "s") {
-    e.stopPropagation();
-    $(".regular").toggleClass("hide");
-    $(".shiny").toggleClass("hide");
-  } else if (e.key == " " || e.which == 13) {
-    document.querySelector(".entry:focus").click();
-  } else if (e.key == "i") {
-    e.stopPropagation();
-    document.querySelector(".flavor").classList.add("shown");
-    $("i").css({
-      "left": "290px"
-    });
-  } else if (e.key == "h") {
-    document.querySelector(".flavor").classList.remove("shown");
-    $("i").css({
-      "left": "40px"
-    });
-  } else if (e.which == 40) {
-    e.preventDefault();
-    window.scrollBy(0, 111.1);
-  } else if (e.which == 38) {
-    e.preventDefault();
-    window.scrollBy(0, -111.1);
-  } else if (e.which == 221) {
-    window.scrollBy(0, 1111);
-  } else if (e.which == 219) {
-    window.scrollBy(0, -1111);
+function pkmnSelect(event) {
+  if (p <= 0) {
+    p = 1;
   }
-};
 
-function showOrNah() {
-  $(".wrapper").toggleClass("shown");
-}
-
-$(".setStartup").click(function() {
-  localStorage.setItem("startupMon", i);
-  localStorage.setItem("startupMonName", document.querySelector("h1").textContent);
-  alert(`${startupMonName} will now display when the page is opened/refreshed!`);
-  setTimeout(locInput, 10);
-});
-
-function locInput() {
-  document.querySelector(".current").value = localStorage.getItem("startupMonName");
-}
-
-function localCall() {
-  i = localStorage.getItem("startupMon");
+  p = event.currentTarget.id;
+  $("#" + p).addClass("hl");
+  $(":not(#" + p + ")").removeClass("hl");
   pkmnLoad();
-  document.querySelector(".current").value = localStorage.getItem("startupMonName");
 }
 
-function input() {
-  fetch("https://pokeapi.com/api/v2/pokemon?limit=1025").then(pkmn => pkmn.json()).then(list => {
-    console.log(list);
+function pkmnLoad() {
+  
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+    const hp = data.stats[0].base_stat;
+    const atk = data.stats[1].base_stat;
+    const def = data.stats[2].base_stat;
+    const spAtk = data.stats[3].base_stat;
+    const spDef = data.stats[4].base_stat;
+    const spd = data.stats[5].base_stat;
+
+
+
+    $("#" + p).addClass("hl");
+    $(":not(#" + p + ")").removeClass("hl");
+
+
+    if (data.id < 10) {
+      $("h1").html(`#00${data.id} - ${data.name}`);
+    }
+    else if (data.id > 10 && data.id < 100) {
+      $("h1").html(`#0${data.id} - ${data.name}`);
+    }
+    else {
+      $("h1").html(`#${data.id} - ${data.name}`);
+    }
+    $("img.art.reg").attr("src", data.sprites.other["official-artwork"].front_default);
+    $("img.art.shiny").attr("src", data.sprites.other["official-artwork"].front_shiny);
+    $(".hp").html(`HP <div class="bar" style="width: ${hp / 2.55 * 4}px">${hp}</div>`);
+    $(".atk").html(`Attack <div class="bar" style="width: ${atk / 2.55 * 4}px">${atk}</div>`);
+    $(".def").html(`Defense <div class="bar" style="width: ${def / 2.55 * 4}px">${def}</div>`);
+    $(".spAtk").html(`Sp. Attack <div class="bar" style="width: ${spAtk / 2.55 * 4}px">${spAtk}</div>`);
+    $(".spDef").html(`Sp. Defense <div class="bar" style="width: ${spDef / 2.55 * 4}px">${spDef}</div>`);
+    $(".spd").html(`Speed <div class="bar" style="width: ${spd / 2.55 * 4}px">${spd}</div>`);
+    $(".height").html((data.height / 3.048).toFixed() + "\'");
+    $(".weight").html((data.weight / 4.536).toFixed() + " lbs.")
+    $(".types").html("");
+    $(".abilities").html(``);
+    for (let t = 0; t <= data.types.length; t++) {
+      $(".types").append(`<div class="icon ${data.types[t].type.name}"><img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${data.types[t].type.name}.svg"></div>`);
+    }
   });
+
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+    for (let a = 0; a <= data.abilities.length; a++) {
+      if (data.abilities[a].is_hidden === true) {
+       $(".abilities").append(`<a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}"><span style="font-weight: 900">(H) </span>${data.abilities[a].ability.name.replace("-", " ")}</a><br>`);
+      }
+      else {
+       $(".abilities").append(`<a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}">${data.abilities[a].ability.name.replace("-", " ")}</a><br>`);
+      }
+   }
+  });
+   
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
+      for (let f = 0; f <= data.flavor_text_entries.length; f++) {
+          let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
+          if (fLang === 0) {
+            $(".lore").html(`<span>${data.flavor_text_entries[f].flavor_text}</span><br><br><sub style="text-transform: capitalize;">Pokemon ${data.flavor_text_entries[f].version.name.replace("-", " ")}</sub>`);
+          }
+      }
+  });
+
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
+for (let g = 0; g <= data.genera.length; g++) {
+  let gLang = data.genera[g].language.name.indexOf("en");
+  if (gLang === 0) {
+    $(".genus").html(`The ${data.genera[g].genus}`);
+  }
 }
+});
+}
+$(document).keydown(function(e) {
+  if (e.key == "r") {
+    p = Math.floor(Math.random() * 898 + 1);
+    pkmnLoad();
+  }
+  if (e.key == "p") {
+    $(".container").toggleClass("hide");
+  }
+  else if (e.key == "s") {
+    $("img.art").toggleClass("hide");
+  }
+  else if (e.key == "ArrowLeft") {
+      p--;
+      pkmnLoad();
+  }
+  else if (e.key == "ArrowRight") {
+      p++;
+      pkmnLoad();
+  }
+  else if (e.key == "ArrowUp") {
+      e.preventDefault();
+      p -= 3;
+      pkmnLoad();
+  }
+  else if (e.key == "ArrowDown") {
+    e.preventDefault();
+    p += 3;
+    pkmnLoad();
+}
+});
