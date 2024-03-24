@@ -6,14 +6,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden scroll;
   position: relative;
   height: 0px;
-  max-width: none !important;
   background: rgb(206, 203, 190);
-  border: 1px solid inherit;
   border-radius: 10px;
+  max-width: none !important;
 }
 
 .container.hide {
@@ -34,7 +32,7 @@ body {
   user-select: none;
   padding-top: 10px;
   padding-bottom: 10px;
-  transition: transform 0.15s;
+  transition: transform 0.15s ease 0s;
   box-shadow: gray 4px -4px 10px inset, gray -4px -4px 10px inset;
 }
 
@@ -74,8 +72,8 @@ h1 {
 }
 
 .art {
-  width: 350px;
-  filter: drop-shadow(4px 4px 10px black);
+  width: 475px;
+  filter: drop-shadow(black 4px 4px 10px);
 }
 
 .art.hide {
@@ -90,10 +88,11 @@ h1 {
 
 @keyframes bounce {
   0% {
-    transform: translate(0px, -14px);
+      transform: translate(0px, -14px);
   }
+
   100% {
-    transform: translate(0px, -8px);
+      transform: translate(0px, -8px);
   }
 }
 
@@ -106,10 +105,10 @@ h1 {
 
 .icon {
   border-radius: 100%;
-  height: 90px;
-  width: 90px;
+  height: 120px;
+  width: 120px;
   margin: 24px auto;
-  transition: 200ms all;
+  transition: all 200ms ease 0s;
   cursor: pointer;
   user-select: none;
 }
@@ -127,93 +126,93 @@ h1 {
 }
 
 .bug {
-  background: #92BC2C;
-  box-shadow: 0 0 20px #92BC2C;
+  background: rgb(146, 188, 44);
+  box-shadow: rgb(146, 188, 44) 0px 0px 20px;
 }
 
 .dark {
-  background: #595761;
-  box-shadow: 0 0 20px #595761;
+  background: rgb(89, 87, 97);
+  box-shadow: rgb(89, 87, 97) 0px 0px 20px;
 }
 
 .dragon {
-  background: #0C69C8;
-  box-shadow: 0 0 20px #0C69C8;
+  background: rgb(12, 105, 200);
+  box-shadow: rgb(12, 105, 200) 0px 0px 20px;
 }
 
 .electric {
-  background: #F2D94E;
-  box-shadow: 0 0 20px #F2D94E;
+  background: rgb(242, 217, 78);
+  box-shadow: rgb(242, 217, 78) 0px 0px 20px;
 }
 
 .fire {
-  background: #FBA54C;
-  box-shadow: 0 0 20px #FBA54C;
+  background: rgb(251, 165, 76);
+  box-shadow: rgb(251, 165, 76) 0px 0px 20px;
 }
 
 .fairy {
-  background: #EE90E6;
-  box-shadow: 0 0 20px #EE90E6;
+  background: rgb(238, 144, 230);
+  box-shadow: rgb(238, 144, 230) 0px 0px 20px;
 }
 
 .fighting {
-  background: #D3425F;
-  box-shadow: 0 0 20px #D3425F;
+  background: rgb(211, 66, 95);
+  box-shadow: rgb(211, 66, 95) 0px 0px 20px;
 }
 
 .flying {
-  background: #A1BBEC;
-  box-shadow: 0 0 20px #A1BBEC;
+  background: rgb(161, 187, 236);
+  box-shadow: rgb(161, 187, 236) 0px 0px 20px;
 }
 
 .ghost {
-  background: #5F6DBC;
-  box-shadow: 0 0 20px #5F6DBC;
+  background: rgb(95, 109, 188);
+  box-shadow: rgb(95, 109, 188) 0px 0px 20px;
 }
 
 .grass {
-  background: #5FBD58;
-  box-shadow: 0 0 20px #5FBD58;
+  background: rgb(95, 189, 88);
+  box-shadow: rgb(95, 189, 88) 0px 0px 20px;
 }
 
 .ground {
-  background: #DA7C4D;
-  box-shadow: 0 0 20px #DA7C4D;
+  background: rgb(218, 124, 77);
+  box-shadow: rgb(218, 124, 77) 0px 0px 20px;
 }
 
 .ice {
-  background: #75D0C1;
-  box-shadow: 0 0 20px #75D0C1;
+  background: rgb(117, 208, 193);
+  box-shadow: rgb(117, 208, 193) 0px 0px 20px;
 }
 
 .normal {
-  background: #A0A29F;
-  box-shadow: 0 0 20px #A0A29F;
+  background: rgb(160, 162, 159);
+  box-shadow: rgb(160, 162, 159) 0px 0px 20px;
 }
 
 .poison {
-  background: #B763CF;
-  box-shadow: 0 0 20px #B763CF;
+  background: rgb(183, 99, 207);
+  box-shadow: rgb(183, 99, 207) 0px 0px 20px;
 }
 
 .psychic {
-  background: #FA8581;
-  box-shadow: 0 0 20px #FA8581;
+  background: rgb(250, 133, 129);
+  box-shadow: rgb(250, 133, 129) 0px 0px 20px;
 }
 
 .rock {
-  background: #C9BB8A;
-  box-shadow: 0 0 20px #C9BB8A;
+  background: rgb(201, 187, 138);
+  box-shadow: rgb(201, 187, 138) 0px 0px 20px;
 }
 
 .steel {
-  background: #5695A3;
-  box-shadow: 0 0 20px #5695A3;
+  background: rgb(86, 149, 163);
+  box-shadow: rgb(86, 149, 163) 0px 0px 20px;
 }
 
 .water {
-  background: #539DDF;
-  box-shadow: 0 0 20px #539DDF;
+  background: rgb(83, 157, 223);
+  box-shadow: rgb(83, 157, 223) 0px 0px 20px;
 }
 
 .stats {
@@ -222,8 +221,7 @@ h1 {
   left: 75%;
   min-width: 500px;
   max-width: 500px;
-  background: rgb(227 226 224);
-  border: 1px solid inherit;
+  background: rgb(227, 226, 224);
   border-radius: 20px;
 }
 
@@ -235,8 +233,7 @@ h1 {
   max-width: 450px;
   height: 500px;
   font-size: 22px;
-  background: rgb(227 226 224);
-  border: 1px solid inherit;
+  background: rgb(227, 226, 224);
   border-radius: 20px;
 }
 
@@ -245,27 +242,41 @@ h1 {
   position: relative;
   top: 20%;
   text-align: center;
-  line-height: 170%;
+  line-height: 165%;
+}
+
+.other div {
+  margin: 16px 0px;
+}
+
+.other h4 {
+  margin: 8px;
 }
 
 sub {
   position: relative;
   top: 50px;
-  bottom: -.25em;
+  bottom: -0.25em;
 }
 
 .stats div {
   margin-left: 30px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .bar {
-  background: #0C69C8;
+  background: var(--bs-primary);
+  border-radius: 2px;
   height: 38px;
   color: antiquewhite;
-  margin: 10px;
-  transition: width 0.35s;
+  margin: 16px;
+  transition: width 0.35s ease 0s;
+}
+
+.stats h2 {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .abilities {
@@ -276,19 +287,55 @@ sub {
   max-width: 450px;
   height: 175px;
   font-size: 22px;
-  background: rgb(227 226 224);
-  border: 1px solid inherit;
+  background: rgb(227, 226, 224);
   border-radius: 20px;
   text-transform: capitalize;
 }
 
 .abilities a {
   position: relative;
-  top: 25%;
+  top: -15%;
 }
 
 .genus {
   position: relative;
   top: -8px;
   font-size: 16px;
+}
+
+.move {
+  border: 1px solid gray;
+  border-radius: 4px;
+  text-transform: capitalize;
+  display: flex;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.move:hover {
+  filter: brightness(1.1);
+}
+
+.icon .cat {
+  width: 50px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.move .icon {
+  width: 60px;
+  height: 60px;
+  margin: 8px auto;
+}
+
+button {
+  position: relative;
+  left: -46%;
+  padding: 0px 6px;
+}
+
+.btn i {
+  font-size: 64px;
 }
