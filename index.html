@@ -6,12 +6,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
 <body onload="get(); pkmnLoad();">
   <br><br>
   <div class="stats">
+    <h2 style="text-align: center; margin-left: 30px;">Stats</h2>
     <div class="hp"></div>
     <div class="atk"></div>
     <div class="def"></div>
@@ -23,10 +25,14 @@
   <center>
     <sub class="genus"></sub>
     <h1>#1 - Bulbasaur</h1>
-    <img class="art reg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png">
-    <img class="art shiny hide" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/1.png">
+    <img class="art reg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png">
+    <img class="art shiny hide" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png">
     <div class="types"></div>
-    <div class="abilities"></div>
+    <div class="abilities">
+      <h2>Abilities</h2>
+      <a target="_blank" href="https://www.smogon.com/dex/sv/abilities/overgrow">overgrow</a><br>
+      <a target="_blank" href="https://www.smogon.com/dex/sv/abilities/chlorophyll"><span style="font-weight: 900">(H) </span>chlorophyll</a><br>
+    </div>
     <div class="other">
       <h4>Height</h4>
       <div class="height"></div>
@@ -34,6 +40,12 @@
       <div class="weight"></div>
       <div class="lore"></div>
     </div>  
+    <div class="learnset">
+      <button class="btn btn-light" onclick="reloadMoves()"><i class="bi bi-arrow-clockwise"></i></button>
+      <ul class="moves">
+
+      </ul>
+    </div>
   </center>
   <div class="container"></div>
   <script src="scripts.js"></script>
