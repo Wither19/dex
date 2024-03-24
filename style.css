@@ -314,11 +314,17 @@ sub {
   flex-direction: column;
 }
 
+.move p {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 12px;
+}
+
 .move:hover {
   filter: brightness(1.1);
 }
 
-.icon .cat {
+.cat {
   width: 50px;
   height: 20px;
   vertical-align: middle;
