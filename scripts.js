@@ -28,9 +28,8 @@ function pkmnSelect(event) {
   p = event.currentTarget.id;
   $("#" + p).addClass("hl");
   $("#" + p).focus();
-  document.querySelector(".entry:focus").scrollIntoView();
   $(":not(#" + p + ")").removeClass("hl");
-    setTimeout(500, pkmnLoad);
+  pkmnLoad();
 }
 
 function pkmnLoad() {
@@ -86,7 +85,7 @@ function pkmnLoad() {
    }
   });
 
-  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+  fetch("https://pokeapi.co/api/v2/pokemn/" + p).then(response => response.json()).then(data => {
       let r = Math.floor(Math.random() * data.moves.length);
       fetch(data.moves[r].move.url).then(moveR => moveR.json()).then(move => {
         $(".moves").html(`
@@ -118,6 +117,15 @@ for (let g = 0; g <= data.genera.length; g++) {
   }
 }
 });
+
+fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
+  $(".varieties").html("");
+  for (let v = 0; v <= data.varieties.length; v++) {
+    fetch(data.varieties[v].pokemon.url).then(vResponse => vResponse.json()).then(v => {
+      $(".varieties").append(`<div id="${v.id}" onclick="pkmnSelect(event);"><img src="${v.sprites.other["official-artwork"].front_default}"><br><h3>${v.name}</h3></div>`);
+    });
+  }
+});
 }
 
 function reloadMoves() {
@@ -147,6 +155,7 @@ $(document).keydown(function(e) {
   if (e.key == "p") {
     $(".container").toggleClass("hide");
     window.scrollIntoView(".hl");
+    pkmnLoad();
   }
   else if (e.key == "s") {
     $("img.art").toggleClass("hide");
