@@ -3,7 +3,6 @@ var p = 1;
 
 function get() {
   fetch("https://pokeapi.co/api/v2/pokedex/1").then(response => response.json()).then(data => {
-    console.log(data);
     for (let i = 0; i < 898; i++) {
       const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
@@ -26,16 +25,12 @@ function get() {
 }
 
 function pkmnSelect(event) {
-  if (p <= 0) {
-    p = 1;
-  }
-
   p = event.currentTarget.id;
   $("#" + p).addClass("hl");
   $("#" + p).focus();
   document.querySelector(".entry:focus").scrollIntoView();
   $(":not(#" + p + ")").removeClass("hl");
-  setTimeout(500, pkmnLoad);
+    setTimeout(500, pkmnLoad);
 }
 
 function pkmnLoad() {
@@ -57,7 +52,7 @@ function pkmnLoad() {
     if (data.id < 10) {
       $("h1").html(`#00${data.id} - ${data.name}`);
     }
-    else if (data.id > 10 && data.id < 100) {
+    else if (data.id >= 10 && data.id < 100) {
       $("h1").html(`#0${data.id} - ${data.name}`);
     }
     else {
@@ -92,10 +87,9 @@ function pkmnLoad() {
   });
 
   fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
-    for (let m = 0; m < 4; m++) {
       let r = Math.floor(Math.random() * data.moves.length);
       fetch(data.moves[r].move.url).then(moveR => moveR.json()).then(move => {
-        $(".moves").append(`
+        $(".moves").html(`
         <li class="move ${move.type.name}">
           <div class="icon ${move.type.name}">
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
@@ -105,8 +99,6 @@ function pkmnLoad() {
           <p><span style="text-transform: none !important">${move.effect_entries[0].short_effect}</span></p>
         </li>`);
       });
-    }
-    $(".moves").html("");
   });
    
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
@@ -129,13 +121,11 @@ for (let g = 0; g <= data.genera.length; g++) {
 }
 
 function reloadMoves() {
-  $(".moves").html("");
-  window.scrollTo(0, 1000);
-  fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
+   fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
     for (let m = 0; m < 4; m++) {
       let r = Math.floor(Math.random() * data.moves.length);
       fetch(data.moves[r].move.url).then(moveR => moveR.json()).then(move => {
-        $(".moves").append(`
+        $(`.moves:nth-child(${m})`).html(`
         <li class="move ${move.type.name}">
           <div class="icon ${move.type.name}">
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${move.type.name}.svg">
@@ -156,9 +146,13 @@ $(document).keydown(function(e) {
   }
   if (e.key == "p") {
     $(".container").toggleClass("hide");
+    window.scrollIntoView(".hl");
   }
   else if (e.key == "s") {
     $("img.art").toggleClass("hide");
+  }
+  else if (e.key == "l") {
+    reloadMoves();
   }
   else if (e.key == "ArrowLeft") {
       p--;
