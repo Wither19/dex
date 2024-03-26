@@ -9,6 +9,7 @@ body {
     overflow: hidden scroll;
     position: relative;
     height: 0px;
+    z-index: 3;
     background: rgb(206, 203, 190);
     border-radius: 10px;
     max-width: none !important;
@@ -55,15 +56,23 @@ body {
     color: white;
   }
   
-  .entry img {
+  .entry img.entryImg {
     transform: scale(1.5);
     position: relative;
     top: -15%;
     left: 43%;
   }
+
+  .varieties .entry img {
+    transform: scale(1.35);
+  }
   
-  .entry:hover img, .entry.hl img {
+  .entry:hover img.entryImg, .entry.hl img.entryImg {
     transform: scale(1.85) translate(0px, -16px);
+  }
+
+  .entry:hover img, .entry.hl img {
+    transform: scale(1.25) translate(0px, -12px);
   }
   
   h1 {
@@ -270,8 +279,12 @@ body {
     border-radius: 2px;
     height: 38px;
     color: antiquewhite;
-    margin: 16px;
+    margin: 10px;
     transition: width 0.35s ease 0s;
+  }
+
+  .bar.orange {
+    background: orangered;
   }
   
   .stats h2 {
@@ -346,6 +359,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    min-height: 250px;
+    max-height: 250px;
   }
 
   .varieties div {
@@ -374,7 +389,7 @@ body {
     }
 
     .stats {
-        left: 68%;
+        left: 65%;
         margin-left: 24px;
     }
 
@@ -384,6 +399,8 @@ body {
     }
 
     .other, .abilities {
-        left: 0.5%;
+        left: 1%;
+        min-width: 450px;
+        max-width: 450px;
     }
   }
