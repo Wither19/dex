@@ -1,6 +1,6 @@
 var i = 0;
 var p = 1;
-
+  // Grabs the National Pokédex
 function get() {
   fetch("https://pokeapi.co/api/v2/pokedex/1").then(response => response.json()).then(data => {
     for (let i = 0; i < 898; i++) {
@@ -18,22 +18,22 @@ function get() {
       newEntry.addEventListener("click", function() {
               $(".container").removeClass("hide");
       });
-      newEntry.innerHTML = `<img src="${spriteUrl}"><br><center><span>${pkmnName}</span></center>`;
+      newEntry.innerHTML = `<img class="entryImg" src="${spriteUrl}"><br><center><span>${pkmnName}</span></center>`;
       document.querySelector("div.container").appendChild(newEntry);
     }
   });
 }
 
 function pkmnSelect(event) {
+  // Called when a Pokémon is manually selected (Highlights the selected element)
   p = event.currentTarget.id;
   $("#" + p).addClass("hl");
   $("#" + p).focus();
   $(":not(#" + p + ")").removeClass("hl");
   pkmnLoad();
 }
-
+  // Actually loads the Pokémon and all relevant data from the Pokédex number (as expressed by p) being changed
 function pkmnLoad() {
-  
   fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
     const hp = data.stats[0].base_stat;
     const atk = data.stats[1].base_stat;
@@ -41,6 +41,7 @@ function pkmnLoad() {
     const spAtk = data.stats[3].base_stat;
     const spDef = data.stats[4].base_stat;
     const spd = data.stats[5].base_stat;
+    const bst = hp + atk + def + spAtk + spDef + spd; 
 
 
 
@@ -48,14 +49,15 @@ function pkmnLoad() {
     $(":not(#" + p + ")").removeClass("hl");
 
 
+
     if (data.id < 10) {
-      $("h1").html(`#00${data.id} - ${data.name}`);
+      $("h1").html(`#00${data.id} - ${data.name.replace("-mega", " (Mega)").replace("-gmax", " (G-Max)")}`);
     }
     else if (data.id >= 10 && data.id < 100) {
-      $("h1").html(`#0${data.id} - ${data.name}`);
+      $("h1").html(`#0${data.id} - ${data.name.replace("-mega", " (Mega)").replace("-gmax", " (G-Max)")}`);
     }
     else {
-      $("h1").html(`#${data.id} - ${data.name}`);
+      $("h1").html(`#${data.id} - ${data.name.replace("-mega", " (Mega)").replace("-gmax", " (G-Max)")}`);
     }
     $("img.art.reg").attr("src", data.sprites.other["official-artwork"].front_default);
     $("img.art.shiny").attr("src", data.sprites.other["official-artwork"].front_shiny);
@@ -65,17 +67,20 @@ function pkmnLoad() {
     $(".spAtk").html(`Sp. Attack <div class="bar" style="width: ${spAtk / 2.55 * 4}px">${spAtk}</div>`);
     $(".spDef").html(`Sp. Defense <div class="bar" style="width: ${spDef / 2.55 * 4}px">${spDef}</div>`);
     $(".spd").html(`Speed <div class="bar" style="width: ${spd / 2.55 * 4}px">${spd}</div>`);
+    $(".bst").html(`Total <div class="bar orange" style="width: ${bst / 2.55 * 1.2}px">${bst}</div>`)
     $(".height").html((data.height / 3.048).toFixed() + "\'");
     $(".weight").html((data.weight / 4.536).toFixed() + " lbs.")
     $(".types").html("");
     $(".abilities").html(`<h2>Abilities</h2>`);
     for (let t = 0; t <= data.types.length; t++) {
+      // iterates through all the given Pokémon's types
       $(".types").append(`<div class="icon ${data.types[t].type.name}"><img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${data.types[t].type.name}.svg"></div>`);
     }
   });
 
+// iterates through all the given Pokémon's abilities
   fetch("https://pokeapi.co/api/v2/pokemon/" + p).then(response => response.json()).then(data => {
-    for (let a = 0; a <= data.abilities.length; a++) {
+  for (let a = 0; a <= data.abilities.length; a++) {
       if (data.abilities[a].is_hidden === true) {
        $(".abilities").append(`<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${data.abilities[a].ability.name}"><span style="font-weight: 900">(H) </span>${data.abilities[a].ability.name.replace("-", " ")}</a>`);
       }
@@ -84,6 +89,7 @@ function pkmnLoad() {
       }
    }
   });
+
 
   fetch("https://pokeapi.co/api/v2/pokemn/" + p).then(response => response.json()).then(data => {
       let r = Math.floor(Math.random() * data.moves.length);
@@ -100,6 +106,7 @@ function pkmnLoad() {
       });
   });
    
+  // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
       for (let f = 0; f <= data.flavor_text_entries.length; f++) {
           let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
@@ -109,6 +116,7 @@ function pkmnLoad() {
       }
   });
 
+  // Finds the English genus
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
 for (let g = 0; g <= data.genera.length; g++) {
   let gLang = data.genera[g].language.name.indexOf("en");
@@ -118,14 +126,19 @@ for (let g = 0; g <= data.genera.length; g++) {
 }
 });
 
+// loads all the different forms for a Pokémon
 fetch("https://pokeapi.co/api/v2/pokemon-species/" + p).then(response => response.json()).then(data => {
   $(".varieties").html("");
-  for (let v = 0; v <= data.varieties.length; v++) {
-    fetch(data.varieties[v].pokemon.url).then(vResponse => vResponse.json()).then(v => {
-      $(".varieties").append(`<div id="${v.id}" onclick="pkmnSelect(event);"><img src="${v.sprites.other["official-artwork"].front_default}"><br><h3>${v.name}</h3></div>`);
-    });
+    for (let v = 0; v < data.varieties.length; v++) {
+      fetch(data.varieties[v + 1].pokemon.url).then(vResponse => vResponse.json()).then(v => {
+        $(".varieties").append(`<div class="entry" id="${v.id}" onclick="pkmnSelect(event);"><img src="${v.sprites.other["official-artwork"].front_default}"><br><h3>${v.name.replace("-mega", " (Mega)").replace("-gmax", " (G-Max)")}</h3></div>`);
+      });
   }
 });
+  if (p >= 10001) {
+    $(".genus").html("");
+    $(".lore").html("");
+  }
 }
 
 function reloadMoves() {
