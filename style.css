@@ -227,7 +227,7 @@ h1 {
 }
 
 .stats {
-  top: 0%;
+  top: -4%;
   min-width: 500px;
   max-width: 500px;
   background: rgb(227, 226, 224);
