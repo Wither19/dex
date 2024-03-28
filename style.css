@@ -228,7 +228,6 @@ h1 {
 
 .stats {
   top: 0%;
-  left: 75%;
   min-width: 500px;
   max-width: 500px;
   background: rgb(227, 226, 224);
@@ -269,7 +268,6 @@ sub {
 }
 
 .stats div {
-  margin-left: 30px;
   text-align: center;
   font-size: 20px;
 }
@@ -397,9 +395,7 @@ div.flex {
     top: 22%;
   }
 
-  .stats {
-    margin-left: 24px;
-  }
+  .stats {}
 
   .move {
     position: relative;
