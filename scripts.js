@@ -166,15 +166,11 @@ function pkmnLoad() {
               }.svg">
           </div>
           <h2>${move.name.replace("-", " ")}</h2>
-          <p><span>Power: ${move.power.replace(
-            "null",
-            "-"
-          )} </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
+          <p><span>Power: ${
+            move.power
+          } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
             move.damage_class.name
-          }.png"></span><span>Accuracy: ${move.accuracy.replace(
-            "null",
-            "-"
-          )}</span></p>
+          }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
           <p><span style="text-transform: none !important">${
             move.effect_entries[0].short_effect
           }</span></p>
