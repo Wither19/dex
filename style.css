@@ -319,9 +319,9 @@ sub {
   text-transform: capitalize;
   display: flex;
   color: white;
-  width: 250px;
-  min-width: 250px;
-  max-width: 250px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
   cursor: pointer;
   justify-content: center;
   flex-direction: column;
