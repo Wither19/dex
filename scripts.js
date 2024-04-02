@@ -181,7 +181,7 @@ function pkmnLoad() {
         let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
         if (fLang === 0) {
           $(".lore").html(
-            `"<span style="font-style: italicized;">${
+            `"<span style="font-style: italic;">${
               data.flavor_text_entries[f].flavor_text
             }</span>"<br><br><sub style="text-transform: capitalize;">Pokémon ${data.flavor_text_entries[
               f
