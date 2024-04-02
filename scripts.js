@@ -5,7 +5,7 @@ function get() {
   fetch("https://pokeapi.co/api/v2/pokedex/30")
     .then((response) => response.json())
     .then((data) => {
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.pokemon_entries.length; i++) {
         const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
         const spriteUrl =
