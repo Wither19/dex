@@ -21,7 +21,12 @@ function get() {
         newEntry.addEventListener("click", function () {
           $(".container").removeClass("hide");
         });
-        newEntry.innerHTML = `<img class="entryImg" src="${spriteUrl}"><br><center><span>${pkmnName}</span></center>`;
+        newEntry.innerHTML = `
+        <img class="entryImg" src="${spriteUrl}">
+        <br>
+        <center>
+        <span>${pkmnName}</span>
+        </center>`;
         document.querySelector("div.container").appendChild(newEntry);
       }
     });
@@ -146,7 +151,7 @@ function pkmnLoad() {
       }
     });
 
-  fetch("https://pokeapi.co/api/v2/pokemn/" + p)
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
       let r = Math.floor(Math.random() * data.moves.length);
@@ -290,14 +295,22 @@ $(document).keydown(function (e) {
     pkmnLoad();
   } else if (e.key == "1") {
     $(".abilities").removeClass("hidden");
+    $(".moves").addClass("hidden");
     $(".stats").addClass("hidden");
     $(".other").addClass("hidden");
   } else if (e.key == "2") {
     $(".abilities").addClass("hidden");
-    $(".stats").removeClass("hidden");
+    $(".moves").removeClass("hidden");
+    $(".stats").addClass("hidden");
     $(".other").addClass("hidden");
   } else if (e.key == "3") {
     $(".abilities").addClass("hidden");
+    $(".moves").addClass("hidden");
+    $(".stats").removeClass("hidden");
+    $(".other").addClass("hidden");
+  } else if (e.key == "4") {
+    $(".abilities").addClass("hidden");
+    $(".moves").addClass("hidden");
     $(".stats").addClass("hidden");
     $(".other").removeClass("hidden");
   }
