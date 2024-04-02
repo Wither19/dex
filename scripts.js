@@ -2,10 +2,10 @@ var i = 0;
 var p = 1;
 // Grabs the National Pokédex
 function get() {
-  fetch("https://pokeapi.co/api/v2/pokedex/1")
+  fetch("https://pokeapi.co/api/v2/pokedex/30")
     .then((response) => response.json())
     .then((data) => {
-      for (let i = 0; i < 898; i++) {
+      for (let i = 0; i < data.length; i++) {
         const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
         const spriteUrl =
