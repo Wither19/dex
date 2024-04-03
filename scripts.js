@@ -35,9 +35,6 @@ function get() {
 function pkmnSelect(event) {
   // Called when a Pokémon is manually selected (Highlights the selected element)
   p = event.currentTarget.id;
-  $("#" + p).addClass("hl");
-  $("#" + p).focus();
-  $(":not(#" + p + ")").removeClass("hl");
   pkmnLoad();
 }
 // Actually loads the Pokémon and all relevant data from the Pokédex number (as expressed by p) being changed
@@ -52,9 +49,6 @@ function pkmnLoad() {
       const spDef = data.stats[4].base_stat;
       const spd = data.stats[5].base_stat;
       const bst = hp + atk + def + spAtk + spDef + spd;
-
-      $("#" + p).addClass("hl");
-      $(":not(#" + p + ")").removeClass("hl");
 
       if (data.id < 10) {
         $("h1").html(
@@ -154,11 +148,13 @@ function pkmnLoad() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
-      let r = Math.floor(Math.random() * data.moves.length);
-      fetch(data.moves[r].move.url)
-        .then((moveR) => moveR.json())
-        .then((move) => {
-          $(".moves").html(`
+      $(".moves").html("");
+      for (let h = 0; h < 4; h++) {
+        let r = Math.floor(Math.random() * data.moves.length);
+        fetch(data.moves[r].move.url)
+          .then((moveR) => moveR.json())
+          .then((move) => {
+            $(".moves").append(`
         <li class="move ${move.type.name}">
           <div class="icon ${move.type.name}">
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${
@@ -169,13 +165,14 @@ function pkmnLoad() {
           <p><span>Power: ${
             move.power
           } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
-            move.damage_class.name
-          }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
+              move.damage_class.name
+            }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
           <p><span style="text-transform: none !important">${
             move.effect_entries[0].short_effect
           }</span></p>
         </li>`);
-        });
+          });
+      }
     });
 
   // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
@@ -203,7 +200,7 @@ function pkmnLoad() {
       for (let g = 0; g <= data.genera.length; g++) {
         let gLang = data.genera[g].language.name.indexOf("en");
         if (gLang === 0) {
-          $(".genus").html(`The ${data.genera[g].genus}`);
+          $(".genus").html(`${data.genera[g].genus}`);
         }
       }
     });
@@ -239,12 +236,13 @@ function reloadMoves() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
-      for (let m = 0; m < 4; m++) {
+      $(".moves").html("");
+      for (let h = 0; h < 4; h++) {
         let r = Math.floor(Math.random() * data.moves.length);
         fetch(data.moves[r].move.url)
           .then((moveR) => moveR.json())
           .then((move) => {
-            $(`.moves:nth-child(${m})`).html(`
+            $(".moves").append(`
         <li class="move ${move.type.name}">
           <div class="icon ${move.type.name}">
               <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${
@@ -254,7 +252,7 @@ function reloadMoves() {
           <h2>${move.name.replace("-", " ")}</h2>
           <p><span>Power: ${
             move.power
-          } </span><span> <img class="cat" src="https://raw.githubusercontent.com/Wither19/dex/main/${
+          } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
               move.damage_class.name
             }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
           <p><span style="text-transform: none !important">${
@@ -313,5 +311,7 @@ $(document).keydown(function (e) {
     $(".moves").addClass("hidden");
     $(".stats").addClass("hidden");
     $(".other").removeClass("hidden");
+  } else if (e.key == "l") {
+    reloadMoves();
   }
 });
