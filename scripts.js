@@ -2,6 +2,17 @@ var i = 0;
 var p = 1;
 
 $(document).ready(function () {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${localStorage.getItem("pkmn")}`)
+    .then((response) => response.json())
+    .then((data) => {
+      $(".textarea").html(`
+    Startup Pokémon: #${localStorage.getItem(
+      "pkmn"
+    )} - <span style="text-transform: capitalize;">${data.name}</span><br>
+    Artwork: ${localStorage.getItem("art-notif")}<br>
+    Type Icons: ${localStorage.getItem("type-notif")}
+  `);
+    });
   p = localStorage.getItem("pkmn");
   pkmnLoad();
 });
@@ -335,14 +346,27 @@ function reloadMoves() {
 $(".options > *").click(function () {
   $(".options").toggleClass("hide");
   pkmnLoad();
+  fetch(`https://pokeapi.co/api/v2/pokemon/${localStorage.getItem("pkmn")}`)
+    .then((response) => response.json())
+    .then((data) => {
+      $(".textarea").html(`
+    Startup Pokémon: #${localStorage.getItem(
+      "pkmn"
+    )} - <span style="text-transform: capitalize;">${data.name}</span><br>
+    Artwork: ${localStorage.getItem("art-notif")}<br>
+    Type Icons: ${localStorage.getItem("type-notif")}
+  `);
+    });
 });
 
 $("#of").click(function () {
   localStorage.setItem("art", "official-artwork");
+  localStorage.setItem("art-notif", "Ken Sugimori");
 });
 
 $("#ho").click(function () {
   localStorage.setItem("art", "home");
+  localStorage.setItem("art-notif", "Pokémon HOME");
 });
 
 $("#pogo").click(function () {
@@ -350,6 +374,7 @@ $("#pogo").click(function () {
     "types",
     "https://duiker101.github.io/pokemon-type-svg-icons"
   );
+  localStorage.setItem("type-notif", "POGO Icons");
 });
 
 $("#bdsp").click(function () {
@@ -357,6 +382,7 @@ $("#bdsp").click(function () {
     "types",
     "https://raw.githubusercontent.com/partywhale/pokemon-type-icons/fcbe6978c61c359680bc07636c3f9bdc0f346b43"
   );
+  localStorage.setItem("type-notif", "BDSP Icons");
 });
 
 $(document).keydown(function (e) {
