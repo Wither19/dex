@@ -47,7 +47,7 @@ body {
 .options.hide {
   position: absolute;
   top: 0px;
-  height: 100%;
+  height: 800px;
   width: 100%;
   display: block;
 }
@@ -107,7 +107,7 @@ sub.credits {
 }
 
 .art {
-  width: 475px;
+  width: 400px;
   filter: drop-shadow(black 4px 4px 10px);
 }
 

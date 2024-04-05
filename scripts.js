@@ -2,19 +2,9 @@ var i = 0;
 var p = 1;
 
 $(document).ready(function () {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${localStorage.getItem("pkmn")}`)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".textarea").html(`
-    Startup Pokémon: #${localStorage.getItem(
-      "pkmn"
-    )} - <span style="text-transform: capitalize;">${data.name}</span><br>
-    Artwork: ${localStorage.getItem("art-notif")}<br>
-    Type Icons: ${localStorage.getItem("type-notif")}
-  `);
-    });
   p = localStorage.getItem("pkmn");
   pkmnLoad();
+  inputUpdate();
 });
 
 // Grabs the National Pokédex
@@ -343,8 +333,7 @@ function reloadMoves() {
     });
 }
 
-$(".options > *").click(function () {
-  $(".options").toggleClass("hide");
+$(".options > *").click(function inputUpdate() {
   pkmnLoad();
   fetch(`https://pokeapi.co/api/v2/pokemon/${localStorage.getItem("pkmn")}`)
     .then((response) => response.json())
@@ -357,6 +346,10 @@ $(".options > *").click(function () {
     Type Icons: ${localStorage.getItem("type-notif")}
   `);
     });
+});
+
+$("#ok").click(function () {
+  $(".options").toggleClass("hide");
 });
 
 $("#of").click(function () {
@@ -440,8 +433,8 @@ $(document).keydown(function (e) {
     let start = prompt(
       "Type in the National Pokédex Number for the Pokémon you want to see on startup."
     );
-
     localStorage.setItem("pkmn", start);
+    inputUpdate();
   } else if (e.key == "o") {
     $(".options").toggleClass("hide");
   }
