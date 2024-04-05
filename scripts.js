@@ -45,7 +45,6 @@ function pkmnSelect(event) {
 }
 // Actually loads the Pokémon and all relevant data from the Pokédex number (as expressed by p) being changed
 function pkmnLoad() {
-  location.hash = p;
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
@@ -380,8 +379,7 @@ $(document).keydown(function (e) {
     pkmnLoad();
   } else if (e.key == "c") {
     let start = prompt(
-      "Type in the National Pokédex Number for the Pokémon you want to see on startup.",
-      "25"
+      "Type in the National Pokédex Number for the Pokémon you want to see on startup."
     );
 
     localStorage.setItem("pkmn", start);
