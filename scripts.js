@@ -6,6 +6,9 @@ $(document).ready(function () {
   pkmnLoad();
   inputUpdate();
 });
+$("input").keydown(function () {
+  inputUpdate();
+});
 
 // Grabs the National Pokédex
 function get() {
@@ -332,6 +335,10 @@ function reloadMoves() {
       }
     });
 }
+
+$(".optButton").click(function () {
+  $(".options").toggleClass("hide");
+});
 
 $(".options > *").click(function inputUpdate() {
   pkmnLoad();
