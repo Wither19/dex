@@ -114,11 +114,11 @@ function pkmnLoad() {
       }
       $("img.art.reg").attr(
         "src",
-        data.sprites.other["official-artwork"].front_default
+        data.sprites.other[localStorage.getItem("art")].front_default
       );
       $("img.art.shiny").attr(
         "src",
-        data.sprites.other["official-artwork"].front_shiny
+        data.sprites.other[localStorage.getItem("art")].front_shiny
       );
       $(".hp").html(
         `HP <div class="bar" style="width: ${(hp / 2.55) * 4}px">${hp}</div>`
@@ -160,7 +160,11 @@ function pkmnLoad() {
       for (let t = 0; t <= data.types.length; t++) {
         // iterates through all the given Pokémon's types
         $(".types").append(
-          `<div class="icon ${data.types[t].type.name}"><img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${data.types[t].type.name}.svg"></div>`
+          `<div class="icon ${
+            data.types[t].type.name
+          }"><img src="${localStorage.getItem("types")}/icons/${
+            data.types[t].type.name
+          }.svg"></div>`
         );
       }
     });
@@ -269,7 +273,9 @@ function pkmnLoad() {
           .then((v) => {
             $(".varieties").append(
               `<div>
-              <img src="${v.sprites.other["official-artwork"].front_default}">
+              <img src="${
+                v.sprites.other[localStorage.getItem("art")].front_default
+              }">
               <br>
               <h3>${v.name
                 .replace("-mega", " (Mega)")
@@ -325,6 +331,33 @@ function reloadMoves() {
       }
     });
 }
+
+$(".options > *").click(function () {
+  $(".options").toggleClass("hide");
+  pkmnLoad();
+});
+
+$("#of").click(function () {
+  localStorage.setItem("art", "official-artwork");
+});
+
+$("#ho").click(function () {
+  localStorage.setItem("art", "home");
+});
+
+$("#pogo").click(function () {
+  localStorage.setItem(
+    "types",
+    "https://duiker101.github.io/pokemon-type-svg-icons"
+  );
+});
+
+$("#bdsp").click(function () {
+  localStorage.setItem(
+    "types",
+    "https://raw.githubusercontent.com/partywhale/pokemon-type-icons/fcbe6978c61c359680bc07636c3f9bdc0f346b43"
+  );
+});
 
 $(document).keydown(function (e) {
   if (e.key == "r") {
@@ -383,5 +416,7 @@ $(document).keydown(function (e) {
     );
 
     localStorage.setItem("pkmn", start);
+  } else if (e.key == "o") {
+    $(".options").toggleClass("hide");
   }
 });

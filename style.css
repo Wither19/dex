@@ -15,10 +15,36 @@ body {
   max-width: none !important;
 }
 
+.options {
+  display: none;
+  height: 0px;
+  z-index: 3;
+  background: rgb(206, 203, 190);
+  border-radius: 10px;
+}
+
+.options a {
+  font-size: 32px;
+  transition: 0.15s ease-in-out;
+}
+
+.options a:hover {
+  transform: translate(0px, 12px);
+}
+
 .container.hide {
   position: absolute;
   top: 0px;
   height: 100%;
+  width: 100%;
+}
+
+.options.hide {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  display: block;
 }
 
 .entry {
@@ -68,6 +94,11 @@ body {
 h1 {
   text-transform: capitalize;
   font-size: 48px;
+}
+
+sub.credits {
+  position: sticky;
+  top: 80%;
 }
 
 .art {
