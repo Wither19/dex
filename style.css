@@ -346,30 +346,18 @@ sub {
   margin: 4px auto;
 }
 
-button {
-  position: relative;
-  left: -46%;
-  padding: 0px 6px;
-}
-
 .varieties {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  min-height: 250px;
-  max-height: 250px;
-}
-
-.varieties div {
-  cursor: pointer;
-}
-
-.varieties img {
-  width: 125px;
 }
 
 .varieties h3 {
   text-transform: capitalize;
+}
+
+.varieties img {
+  width: 150px;
 }
 
 .btn i {

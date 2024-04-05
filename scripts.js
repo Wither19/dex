@@ -1,11 +1,17 @@
 var i = 0;
 var p = 1;
+
+$(document).ready(function () {
+  p = localStorage.getItem("pkmn");
+  pkmnLoad();
+});
+
 // Grabs the National Pokédex
 function get() {
   fetch("https://pokeapi.co/api/v2/pokedex/1")
     .then((response) => response.json())
     .then((data) => {
-      for (let i = 0; i < 898; i++) {
+      for (let i = 0; i < 1025; i++) {
         const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
         const spriteUrl =
@@ -39,6 +45,7 @@ function pkmnSelect(event) {
 }
 // Actually loads the Pokémon and all relevant data from the Pokédex number (as expressed by p) being changed
 function pkmnLoad() {
+  location.hash = p;
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
@@ -54,19 +61,56 @@ function pkmnLoad() {
         $("h1").html(
           `#00${data.id} - ${data.name
             .replace("-mega", " (Mega)")
-            .replace("-gmax", " (G-Max)")}`
+            .replace("-gmax", " (G-Max)")
+            .replace("-alola", " (Alolan)")
+            .replace("-galar", " (Galarian)")
+            .replace("-hisui", " (Hisuian)")
+            .replace("-paldea", " (Paldea)")
+            .replace("-10-power-construct", " (10%)")
+            .replace("-50-power-construct", " (50%)")
+            .replace("-complete", " (Complete)")}`
         );
       } else if (data.id >= 10 && data.id < 100) {
         $("h1").html(
           `#0${data.id} - ${data.name
             .replace("-mega", " (Mega)")
-            .replace("-gmax", " (G-Max)")}`
+            .replace("-primal", " (Primal)")
+            .replace("-gmax", " (G-Max)")
+            .replace("-alola", " (Alolan)")
+            .replace("-galar", " (Galarian)")
+            .replace("-hisui", " (Hisuian)")
+            .replace("-paldea", " (Paldea)")
+            .replace("-10-power-construct", " (10%)")
+            .replace("-50-power-construct", " (50%)")
+            .replace("-complete", " (Complete)")}`
+        );
+      } else if (data.id > 10000) {
+        $("h1").html(
+          `${data.name
+            .replace("-mega", " (Mega)")
+            .replace("-primal", " (Primal)")
+            .replace("-gmax", " (G-Max)")
+            .replace("-alola", " (Alolan)")
+            .replace("-galar", " (Galarian)")
+            .replace("-hisui", " (Hisuian)")
+            .replace("-paldea", " (Paldea)")
+            .replace("-10-power-construct", " (10%)")
+            .replace("-50-power-construct", " (50%)")
+            .replace("-complete", " (Complete)")}`
         );
       } else {
         $("h1").html(
           `#${data.id} - ${data.name
             .replace("-mega", " (Mega)")
-            .replace("-gmax", " (G-Max)")}`
+            .replace("-primal", " (Primal)")
+            .replace("-gmax", " (G-Max)")
+            .replace("-alola", " (Alolan)")
+            .replace("-galar", " (Galarian)")
+            .replace("-hisui", " (Hisuian)")
+            .replace("-paldea", " (Paldea)")
+            .replace("-10-power-construct", " (10%)")
+            .replace("-50-power-construct", " (50%)")
+            .replace("-complete", " (Complete)")}`
         );
       }
       $("img.art.reg").attr(
@@ -129,7 +173,12 @@ function pkmnLoad() {
       for (let a = 0; a <= data.abilities.length; a++) {
         if (data.abilities[a].is_hidden === true) {
           $(".abilities").append(
-            `<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${
+            `<br><a target="_blank" title="View ${data.abilities[
+              a
+            ].ability.name.replace(
+              "-",
+              " "
+            )} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${
               data.abilities[a].ability.name
             }"><span style="font-weight: 900">(H) </span>${data.abilities[
               a
@@ -137,7 +186,12 @@ function pkmnLoad() {
           );
         } else {
           $(".abilities").append(
-            `<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${
+            `<br><a target="_blank" title="View ${data.abilities[
+              a
+            ].ability.name.replace(
+              "-",
+              " "
+            )} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${
               data.abilities[a].ability.name
             }">${data.abilities[a].ability.name.replace("-", " ")}</a>`
           );
@@ -215,13 +269,21 @@ function pkmnLoad() {
           .then((vResponse) => vResponse.json())
           .then((v) => {
             $(".varieties").append(
-              `<div class="entry" id="${
-                v.id
-              }" onclick="pkmnSelect(event);"><img src="${
-                v.sprites.other["official-artwork"].front_default
-              }"><br><h3>${v.name
+              `<div>
+              <img src="${v.sprites.other["official-artwork"].front_default}">
+              <br>
+              <h3>${v.name
                 .replace("-mega", " (Mega)")
-                .replace("-gmax", " (G-Max)")}</h3></div>`
+                .replace("-primal", " (Primal)")
+                .replace("-gmax", " (G-Max)")
+                .replace("-alola", " (Alolan)")
+                .replace("-galar", " (Galarian)")
+                .replace("-hisui", " (Hisuian)")
+                .replace("-paldea", " (Paldean)")
+                .replace("-10-power-construct", " (10%)")
+                .replace("-50-power-construct", " (50%)")
+                .replace("-complete", " (Complete)")}</h3>
+              </div>`
             );
           });
       }
@@ -229,6 +291,7 @@ function pkmnLoad() {
   if (p >= 10001) {
     $(".genus").html("");
     $(".lore").html("");
+    $(".varieties").html("");
   }
 }
 
@@ -266,12 +329,11 @@ function reloadMoves() {
 
 $(document).keydown(function (e) {
   if (e.key == "r") {
-    p = Math.floor(Math.random() * 898 + 1);
+    p = Math.floor(Math.random() * 1025 + 1);
     pkmnLoad();
   }
   if (e.key == "p") {
     $(".container").toggleClass("hide");
-    window.scrollIntoView(".hl");
     pkmnLoad();
   } else if (e.key == "s") {
     $("img.art").toggleClass("hide");
@@ -313,5 +375,15 @@ $(document).keydown(function (e) {
     $(".other").removeClass("hidden");
   } else if (e.key == "l") {
     reloadMoves();
+  } else if (e.key == "v") {
+    p = 10001;
+    pkmnLoad();
+  } else if (e.key == "c") {
+    let start = prompt(
+      "Type in the National Pokédex Number for the Pokémon you want to see on startup.",
+      "25"
+    );
+
+    localStorage.setItem("pkmn", start);
   }
 });
