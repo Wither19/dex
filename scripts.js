@@ -124,6 +124,7 @@ function pkmnLoad() {
         "src",
         data.sprites.other[localStorage.getItem("art")].front_shiny
       );
+
       $(".hp").html(
         `HP <div class="bar" style="width: ${(hp / 2.55) * 4}px">${hp}</div>`
       );
@@ -160,7 +161,7 @@ function pkmnLoad() {
       $(".height").html((data.height / 3.048).toFixed() + "'");
       $(".weight").html((data.weight / 4.536).toFixed() + " lbs.");
       $(".types").html("");
-      $(".abilities").html(`<h2>Abilities</h2>`);
+      $(".abilities").html("");
       for (let t = 0; t <= data.types.length; t++) {
         // iterates through all the given Pokémon's types
         $(".types").append(
@@ -206,7 +207,7 @@ function pkmnLoad() {
       }
     });
 
-  fetch("https://pokeapi.co/api/v2/pokemon/" + p)
+  fetch("https://pokeapi.co/api/v2/pokeon/" + p)
     .then((response) => response.json())
     .then((data) => {
       $(".moves").html("");
@@ -267,7 +268,7 @@ function pkmnLoad() {
     });
 
   // loads all the different forms for a Pokémon
-  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
+  fetch("https://pokeapi.co/api/v2/pokeon-species/" + p)
     .then((response) => response.json())
     .then((data) => {
       $(".varieties").html("");
@@ -346,9 +347,11 @@ $(".options > *").click(function inputUpdate() {
     .then((response) => response.json())
     .then((data) => {
       $(".textarea").html(`
-    Startup Pokémon: #${localStorage.getItem(
+    Default Pokémon: #${localStorage.getItem(
       "pkmn"
-    )} - <span style="text-transform: capitalize;">${data.name}</span><br>
+    )} - <span style="text-transform: capitalize;">${
+        data.name
+      }</span><br>(Change this using <kbd>C</kbd>!)<br>
     Artwork: ${localStorage.getItem("art-notif")}<br>
     Type Icons: ${localStorage.getItem("type-notif")}
   `);
@@ -411,26 +414,6 @@ $(document).keydown(function (e) {
     e.preventDefault();
     p += 3;
     pkmnLoad();
-  } else if (e.key == "1") {
-    $(".abilities").removeClass("hidden");
-    $(".moves").addClass("hidden");
-    $(".stats").addClass("hidden");
-    $(".other").addClass("hidden");
-  } else if (e.key == "2") {
-    $(".abilities").addClass("hidden");
-    $(".moves").removeClass("hidden");
-    $(".stats").addClass("hidden");
-    $(".other").addClass("hidden");
-  } else if (e.key == "3") {
-    $(".abilities").addClass("hidden");
-    $(".moves").addClass("hidden");
-    $(".stats").removeClass("hidden");
-    $(".other").addClass("hidden");
-  } else if (e.key == "4") {
-    $(".abilities").addClass("hidden");
-    $(".moves").addClass("hidden");
-    $(".stats").addClass("hidden");
-    $(".other").removeClass("hidden");
   } else if (e.key == "l") {
     reloadMoves();
   } else if (e.key == "v") {
