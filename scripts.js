@@ -1764,3 +1764,8 @@ $(".ui-autocomplete").click(function () {
   s = document.querySelector("#autoComplete").value;
   pkmnLoadFromSearch();
 });
+
+$(".ui-menu .ui-menu-item-wrapper").click(function() {
+      s = document.querySelector("#autoComplete").value;
+  pkmnLoadFromSearch();
+});
