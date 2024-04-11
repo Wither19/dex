@@ -37,20 +37,22 @@
     />
     <link
       rel="stylesheet"
-      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+      href="https://code.jquery.com/ui/1.13.2/themes/overcast/jquery-ui.css"
     />
     <title>Pokédex</title>
   </head>
   <body onload="get();">
     <div class="buttonGroup">
-      <button class="dexButton" style="font-size: 40px; z-index: 4;">
+      <button class="dexButton" style="font-size: 28px; z-index: 4;">
         Pokédex
       </button>
-      <button class="shiny" style="font-size: 40px; z-index: 4;">Shiny</button>
-      <button class="surprise" style="font-size: 40px; z-index: 4;">
+      <button class="shinyButton" style="font-size: 28px; z-index: 4;">
+        Shiny
+      </button>
+      <button class="surprise" style="font-size: 28px; z-index: 4;">
         Surprise Me!
       </button>
-      <button class="optButton" style="font-size: 40px; z-index: 4;">
+      <button class="optButton" style="font-size: 28px; z-index: 4;">
         Options
       </button>
     </div>
@@ -67,7 +69,7 @@
         autocapitalize="off"
         maxlength="2048"
         tabindex="1"
-        style="text-transform: capitalize;"
+        style="text-transform: capitalize; width: 400px; height: 48px; font-size: 24px;"
       />
       <br /><br />
       <h1></h1>
@@ -101,21 +103,37 @@
           <div class="spDef"></div>
           <div class="spd"></div>
           <div class="bst"></div>
+          <div class="tier"></div>
         </div>
         <div class="other">
-          <h2>Height</h2>
-          <div class="height"></div>
-          <h2>Weight</h2>
-          <div class="weight"></div>
+          <div class="biometrics header">
+            <h2>Height</h2>
+            <h2>Weight</h2>
+          </div>
+          <div class="biometrics">
+            <div class="height"></div>
+            <div class="weight"></div>
+          </div>
           <div class="lore"></div>
         </div>
       </div>
     </center>
     <sub class="credits"
-      >Credits to PokéAPI<br />Msikma's
-      <a href="https://github.com/msikma/pokesprite">PokéSprite</a> for the box
-      sprites up to Gen 8<br />
-      <a href="https://github.com/Duiker101/pokemon-type-svg-icons"
+      >This isn't the first website to use it, and it certainly won't be the
+      last; Credits to
+      <a target="_blank" href="https://jquery.com/">jQuery</a> and
+      <a target="_blank" href="https://jqueryui.com/">jQuery UI</a>
+      <br />Credits to
+      <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer"
+        >PokéAPI</a
+      ><br />Msikma's
+      <a target="_blank" href="https://github.com/msikma/pokesprite"
+        >PokéSprite</a
+      >
+      for the box sprites up to Gen 8<br />
+      <a
+        target="_blank"
+        href="https://github.com/Duiker101/pokemon-type-svg-icons"
         >Duiker101</a
       >
       and

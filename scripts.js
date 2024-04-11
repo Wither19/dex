@@ -1027,6 +1027,220 @@ var dex = [
   "iron-crown",
   "terapagos",
   "pecharunt",
+  "deoxys-attack",
+  "wormadam-sandy",
+  "wormadam-trash",
+  "shaymin-sky",
+  "rotom-heat",
+  "rotom-wash",
+  "rotom-frost",
+  "rotom-fan",
+  "rotom-mow",
+  "deoxys-defense",
+  "giratina-origin",
+  "basculin-blue-striped",
+  "castform-sunny",
+  "castform-rainy",
+  "castform-snowy",
+  "deoxys-speed",
+  "aegislash-blade",
+  "darmanitan-zen",
+  "tornadus-therian",
+  "thundurus-therian",
+  "landorus-therian",
+  "kyurem-black",
+  "kyurem-white",
+  "scizor-mega",
+  "manectric-mega",
+  "abomasnow-mega",
+  "swampert-mega",
+  "sceptile-mega",
+  "altaria-mega",
+  "sharpedo-mega",
+  "steelix-mega",
+  "pidgeot-mega",
+  "keldeo-resolute",
+  "meowstic-female",
+  "glalie-mega",
+  "diancie-mega",
+  "metagross-mega",
+  "kyogre-primal",
+  "groudon-primal",
+  "rayquaza-mega",
+  "pikachu-rock-star",
+  "pikachu-belle",
+  "pikachu-pop-star",
+  "pikachu-phd",
+  "pikachu-libre",
+  "camerupt-mega",
+  "lopunny-mega",
+  "salamence-mega",
+  "beedrill-mega",
+  "rattata-alola",
+  "raticate-alola",
+  "raticate-totem-alola",
+  "pikachu-original-cap",
+  "pikachu-hoenn-cap",
+  "pikachu-unova-cap",
+  "pikachu-alola-cap",
+  "geodude-alola",
+  "graveler-alola",
+  "greninja-ash",
+  "zygarde-10-power-construct",
+  "venusaur-mega",
+  "charizard-mega-x",
+  "charizard-mega-y",
+  "blastoise-mega",
+  "alakazam-mega",
+  "gengar-mega",
+  "kangaskhan-mega",
+  "pinsir-mega",
+  "gyarados-mega",
+  "aerodactyl-mega",
+  "zygarde-50-power-construct",
+  "zygarde-complete",
+  "meloetta-pirouette",
+  "oricorio-pom-pom",
+  "oricorio-pau",
+  "oricorio-sensu",
+  "wishiwashi-school",
+  "minior-orange-meteor",
+  "minior-yellow-meteor",
+  "minior-green-meteor",
+  "minior-blue-meteor",
+  "minior-indigo-meteor",
+  "minior-violet-meteor",
+  "minior-red",
+  "minior-orange",
+  "minior-yellow",
+  "minior-green",
+  "minior-blue",
+  "minior-indigo",
+  "minior-violet",
+  "mimikyu-totem-disguised",
+  "mimikyu-totem-busted",
+  "kommo-o-totem",
+  "pikachu-partner-cap",
+  "marowak-totem",
+  "ribombee-totem",
+  "rockruff-own-tempo",
+  "lycanroc-dusk",
+  "araquanid-totem",
+  "togedemaru-totem",
+  "necrozma-dusk",
+  "necrozma-dawn",
+  "necrozma-ultra",
+  "pikachu-starter",
+  "eevee-starter",
+  "pikachu-world-cap",
+  "meowth-galar",
+  "ponyta-galar",
+  "rapidash-galar",
+  "slowpoke-galar",
+  "slowbro-galar",
+  "farfetchd-galar",
+  "weezing-galar",
+  "mr-mime-galar",
+  "articuno-galar",
+  "zapdos-galar",
+  "moltres-galar",
+  "slowking-galar",
+  "corsola-galar",
+  "zigzagoon-galar",
+  "linoone-galar",
+  "darumaka-galar",
+  "darmanitan-galar-standard",
+  "darmanitan-galar-zen",
+  "yamask-galar",
+  "stunfisk-galar",
+  "cramorant-gulping",
+  "cramorant-gorging",
+  "toxtricity-low-key",
+  "eiscue-noice",
+  "mewtwo-mega-x",
+  "mewtwo-mega-y",
+  "ampharos-mega",
+  "heracross-mega",
+  "houndoom-mega",
+  "tyranitar-mega",
+  "blaziken-mega",
+  "gardevoir-mega",
+  "mawile-mega",
+  "aggron-mega",
+  "medicham-mega",
+  "banette-mega",
+  "absol-mega",
+  "garchomp-mega",
+  "lucario-mega",
+  "latias-mega",
+  "latios-mega",
+  "sableye-mega",
+  "indeedee-female",
+  "morpeko-hangry",
+  "zacian-crowned",
+  "zamazenta-crowned",
+  "eternatus-eternamax",
+  "urshifu-rapid-strike",
+  "zarude-dada",
+  "calyrex-ice",
+  "calyrex-shadow",
+  "venusaur-gmax",
+  "charizard-gmax",
+  "blastoise-gmax",
+  "butterfree-gmax",
+  "pikachu-gmax",
+  "meowth-gmax",
+  "machamp-gmax",
+  "gengar-gmax",
+  "kingler-gmax",
+  "lapras-gmax",
+  "eevee-gmax",
+  "snorlax-gmax",
+  "garbodor-gmax",
+  "melmetal-gmax",
+  "rillaboom-gmax",
+  "cinderace-gmax",
+  "inteleon-gmax",
+  "corviknight-gmax",
+  "orbeetle-gmax",
+  "drednaw-gmax",
+  "coalossal-gmax",
+  "flapple-gmax",
+  "appletun-gmax",
+  "sandaconda-gmax",
+  "toxtricity-amped-gmax",
+  "centiskorch-gmax",
+  "hatterene-gmax",
+  "grimmsnarl-gmax",
+  "alcremie-gmax",
+  "copperajah-gmax",
+  "duraludon-gmax",
+  "urshifu-single-strike-gmax",
+  "urshifu-rapid-strike-gmax",
+  "toxtricity-low-key-gmax",
+  "growlithe-hisui",
+  "arcanine-hisui",
+  "voltorb-hisui",
+  "electrode-hisui",
+  "typhlosion-hisui",
+  "qwilfish-hisui",
+  "sneasel-hisui",
+  "samurott-hisui",
+  "lilligant-hisui",
+  "zorua-hisui",
+  "zoroark-hisui",
+  "braviary-hisui",
+  "sliggoo-hisui",
+  "goodra-hisui",
+  "avalugg-hisui",
+  "decidueye-hisui",
+  "gallade-mega",
+  "dialga-origin",
+  "palkia-origin",
+  "basculin-white-striped",
+  "basculegion-female",
+  "enamorus-therian",
+  "tauros-paldea-combat-breed",
 ];
 
 $(document).ready(function () {
@@ -1091,6 +1305,18 @@ function pkmnLoad() {
       const spDef = data.stats[4].base_stat;
       const spd = data.stats[5].base_stat;
       const bst = hp + atk + def + spAtk + spDef + spd;
+
+      if (bst <= 150) {
+        $(".tier").html("D");
+      } else if (bst > 150 && bst <= 300) {
+        $(".tier").html("C");
+      } else if (bst > 3000 && bst <= 400) {
+        $(".tier").html("B");
+      } else if (bst > 400 && bst <= 600) {
+        $(".tier").html("A");
+      } else if (bst > 600 && bst <= 800) {
+        $(".tier").html("S");
+      }
 
       if (data.id < 10) {
         $("h1").html(
@@ -1354,6 +1580,18 @@ function pkmnLoadFromSearch() {
       const spd = data.stats[5].base_stat;
       const bst = hp + atk + def + spAtk + spDef + spd;
 
+      if (bst <= 150) {
+        $(".tier").html("D");
+      } else if (bst > 150 && bst <= 300) {
+        $(".tier").html("C");
+      } else if (bst > 3000 && bst <= 400) {
+        $(".tier").html("B");
+      } else if (bst > 400 && bst <= 600) {
+        $(".tier").html("A");
+      } else if (bst > 600 && bst <= 800) {
+        $(".tier").html("S");
+      }
+
       if (data.id < 10) {
         $("h1").html(
           `#00${data.id} - ${data.name
@@ -1399,6 +1637,8 @@ function pkmnLoadFromSearch() {
             .replace("-50-power-construct", " (50%)")
             .replace("-complete", " (Complete)")}`
         );
+        $(".genus").html("");
+        $(".lore").html("");
       } else {
         $("h1").html(
           `#${data.id} - ${data.name
@@ -1471,6 +1711,8 @@ function pkmnLoadFromSearch() {
           }.svg"></div>`
         );
       }
+      p = data.id;
+      document.querySelector("#autoComplete").value = "";
     });
 
   // iterates through all the given Pokémon's abilities
@@ -1695,7 +1937,7 @@ $(".surprise").click(function () {
   pkmnLoad();
 });
 
-$(".shiny").click(function () {
+$(".art, .shinyButton").click(function () {
   $("img.art").toggleClass("hide");
 });
 
@@ -1762,10 +2004,5 @@ $("#autoComplete").autocomplete({
 
 $(".ui-autocomplete").click(function () {
   s = document.querySelector("#autoComplete").value;
-  pkmnLoadFromSearch();
-});
-
-$(".ui-menu .ui-menu-item-wrapper").click(function() {
-      s = document.querySelector("#autoComplete").value;
   pkmnLoadFromSearch();
 });

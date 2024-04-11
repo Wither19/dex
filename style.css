@@ -161,6 +161,10 @@ h1 {
   margin-left: 50px;
 }
 
+.bst {
+  margin-bottom: 0px;
+}
+
 .abilities h2 {
   font-size: 28px;
 }
@@ -183,15 +187,15 @@ h1 {
 }
 
 .bar {
-    height: 28px;
-    background: linear-gradient(180deg, #2196F3, #00BCD4 60%);
-    color: antiquewhite;
-    font-size: 16px;
+  height: 28px;
+  background: var(--bs-primary);
+  color: antiquewhite;
+  font-size: 16px;
 }
 
 .other {
   position: absolute;
-  top: 25%;
+  top: 33%;
   left: 66%;
   width: 450px;
   min-width: 450px;
@@ -328,6 +332,25 @@ sub {
   bottom: -0.25em;
 }
 
+.lore sub {
+  font-size: 16px;
+}
+
+.biometrics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.biometrics div {
+  font-size: 24px;
+}
+
+.tier {
+  filter: drop-shadow(3px 3px 2px gray);
+  font-size: 40px;
+}
+
 .bar.orange {
   background: orangered;
 }
@@ -402,15 +425,23 @@ sub {
 
 .ui-autocomplete {
   overflow: hidden auto;
-  height: 300px;
+  max-height: 300px;
   text-transform: capitalize;
-  font-size: 18px;
+  font-size: 20px;
   font-family: 'Lato', sans-serif;
+}
+
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: 'Lato', sans-serif !important;
 }
 
 @media (max-width: 1550px) {
   .art {
-    width: 400px;
+    width: 330px;
   }
 
   .move {
