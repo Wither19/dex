@@ -757,10 +757,6 @@ $("body").keydown(function (e) {
   }
 });
 
-$("#autoComplete").autocomplete({
-  source: dex,
-});
-
 $(".ui-autocomplete").click(function () {
   s = document.querySelector("#autoComplete").value;
   pkmnLoadFromSearch();
