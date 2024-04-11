@@ -1239,3 +1239,7 @@ var dex = [
   "enamorus-therian",
   "tauros-paldea-combat-breed",
 ];
+
+$("#autoComplete").autocomplete({
+  source: dex,
+});
