@@ -217,36 +217,6 @@ function pkmnLoad() {
       }
     });
 
-  fetch("https://pokeapi.co/api/v2/pokeon/" + p)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".moves").html("");
-      for (let h = 0; h < 4; h++) {
-        let r = Math.floor(Math.random() * data.moves.length);
-        fetch(data.moves[r].move.url)
-          .then((moveR) => moveR.json())
-          .then((move) => {
-            $(".moves").append(`
-        <li class="move ${move.type.name}">
-          <div class="icon ${move.type.name}">
-              <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${
-                move.type.name
-              }.svg">
-          </div>
-          <h2>${move.name.replace("-", " ")}</h2>
-          <p><span>Power: ${
-            move.power
-          } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
-              move.damage_class.name
-            }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
-          <p><span style="text-transform: none !important">${
-            move.effect_entries[0].short_effect
-          }</span></p>
-        </li>`);
-          });
-      }
-    });
-
   // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
     .then((response) => response.json())
@@ -277,37 +247,6 @@ function pkmnLoad() {
       }
     });
 
-  // loads all the different forms for a Pokémon
-  fetch("https://pokeapi.co/api/v2/pokeon-species/" + p)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".varieties").html("");
-      for (let v = 0; v < data.varieties.length; v++) {
-        fetch(data.varieties[v + 1].pokemon.url)
-          .then((vResponse) => vResponse.json())
-          .then((v) => {
-            $(".varieties").append(
-              `<div>
-              <img src="${
-                v.sprites.other[localStorage.getItem("art")].front_default
-              }">
-              <br>
-              <h3>${v.name
-                .replace("-mega", " (Mega)")
-                .replace("-primal", " (Primal)")
-                .replace("-gmax", " (G-Max)")
-                .replace("-alola", " (Alolan)")
-                .replace("-galar", " (Galarian)")
-                .replace("-hisui", " (Hisuian)")
-                .replace("-paldea", " (Paldean)")
-                .replace("-10-power-construct", " (10%)")
-                .replace("-50-power-construct", " (50%)")
-                .replace("-complete", " (Complete)")}</h3>
-              </div>`
-            );
-          });
-      }
-    });
   if (p >= 10001) {
     $(".genus").html("");
     $(".lore").html("");
@@ -485,37 +424,7 @@ function pkmnLoadFromSearch() {
       }
     });
 
-  fetch("https://pokeapi.co/api/v2/pokeon/" + s)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".moves").html("");
-      for (let h = 0; h < 4; h++) {
-        let r = Math.floor(Math.random() * data.moves.length);
-        fetch(data.moves[r].move.url)
-          .then((moveR) => moveR.json())
-          .then((move) => {
-            $(".moves").append(`
-        <li class="move ${move.type.name}">
-          <div class="icon ${move.type.name}">
-              <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${
-                move.type.name
-              }.svg">
-          </div>
-          <h2>${move.name.replace("-", " ")}</h2>
-          <p><span>Power: ${
-            move.power
-          } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
-              move.damage_class.name
-            }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
-          <p><span style="text-transform: none !important">${
-            move.effect_entries[0].short_effect
-          }</span></p>
-        </li>`);
-          });
-      }
-    });
-
-  // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
+  // Fetches the Pokémon species endpoint for s and iterates through its Pokédex entries to find the most recent English entry
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
     .then((response) => response.json())
     .then((data) => {
@@ -544,75 +453,11 @@ function pkmnLoadFromSearch() {
         }
       }
     });
-
-  // loads all the different forms for a Pokémon
-  fetch("https://pokeapi.co/api/v2/pokeon-species/" + s)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".varieties").html("");
-      for (let v = 0; v < data.varieties.length; v++) {
-        fetch(data.varieties[v + 1].pokemon.url)
-          .then((vResponse) => vResponse.json())
-          .then((v) => {
-            $(".varieties").append(
-              `<div>
-              <img src="${
-                v.sprites.other[localStorage.getItem("art")].front_default
-              }">
-              <br>
-              <h3>${v.name
-                .replace("-mega", " (Mega)")
-                .replace("-primal", " (Primal)")
-                .replace("-gmax", " (G-Max)")
-                .replace("-alola", " (Alolan)")
-                .replace("-galar", " (Galarian)")
-                .replace("-hisui", " (Hisuian)")
-                .replace("-paldea", " (Paldean)")
-                .replace("-10-power-construct", " (10%)")
-                .replace("-50-power-construct", " (50%)")
-                .replace("-complete", " (Complete)")}</h3>
-              </div>`
-            );
-          });
-      }
-    });
   if (p >= 10001) {
     $(".genus").html("");
     $(".lore").html("");
     $(".varieties").html("");
   }
-}
-
-function reloadMoves() {
-  fetch("https://pokeapi.co/api/v2/pokemon/" + s)
-    .then((response) => response.json())
-    .then((data) => {
-      $(".moves").html("");
-      for (let h = 0; h < 4; h++) {
-        let r = Math.floor(Math.random() * data.moves.length);
-        fetch(data.moves[r].move.url)
-          .then((moveR) => moveR.json())
-          .then((move) => {
-            $(".moves").append(`
-        <li class="move ${move.type.name}">
-          <div class="icon ${move.type.name}">
-              <img src="https://duiker101.github.io/pokemon-type-svg-icons/icons/${
-                move.type.name
-              }.svg">
-          </div>
-          <h2>${move.name.replace("-", " ")}</h2>
-          <p><span>Power: ${
-            move.power
-          } </span><span> <img src="https://raw.githubusercontent.com/Wither19/dex/main/${
-              move.damage_class.name
-            }.png"></span><span>Accuracy: ${move.accuracy}</span></p>
-          <p><span style="text-transform: none !important">${
-            move.effect_entries[0].short_effect
-          }</span></p>
-        </li>`);
-          });
-      }
-    });
 }
 
 $(".optButton").click(function () {
@@ -692,9 +537,6 @@ $("body").keydown(function (e) {
   } else if (e.key == "s" && e.altKey) {
     $("img.art").toggleClass("hide");
     e.stopPropagation();
-  } else if (e.key == "l" && e.altKey) {
-    reloadMoves();
-    e.stopPropagation();
   } else if (e.key == "ArrowLeft" && e.altKey) {
     e.stopPropagation();
     e.preventDefault();
@@ -714,13 +556,6 @@ $("body").keydown(function (e) {
     e.stopPropagation();
     e.preventDefault();
     p += 3;
-    pkmnLoad();
-  } else if (e.key == "l" && e.altKey) {
-    e.stopPropagation();
-    reloadMoves();
-  } else if (e.key == "v" && e.altKey) {
-    e.stopPropagation();
-    p = 10001;
     pkmnLoad();
   } else if (e.key == "c" && e.altKey) {
     e.stopPropagation();
