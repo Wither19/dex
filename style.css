@@ -27,6 +27,7 @@ body {
 
 .buttonGroup {
   position: absolute;
+  z-index: 4;
   top: 0px;
   left: 0px;
 }

@@ -65,18 +65,6 @@ function pkmnLoad() {
       const spd = data.stats[5].base_stat;
       const bst = hp + atk + def + spAtk + spDef + spd;
 
-      if (bst <= 150) {
-        $(".tier").html("D");
-      } else if (bst > 150 && bst <= 300) {
-        $(".tier").html("C");
-      } else if (bst > 3000 && bst <= 400) {
-        $(".tier").html("B");
-      } else if (bst > 400 && bst <= 600) {
-        $(".tier").html("A");
-      } else if (bst > 600 && bst <= 800) {
-        $(".tier").html("S");
-      }
-
       if (data.id < 10) {
         $("h1").html(
           `#00${data.id} - ${data.name
@@ -331,6 +319,8 @@ function pkmnLoadFromSearch() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + s)
     .then((response) => response.json())
     .then((data) => {
+      p = data.id;
+      document.querySelector("#autoComplete").value = "";
       const hp = data.stats[0].base_stat;
       const atk = data.stats[1].base_stat;
       const def = data.stats[2].base_stat;
@@ -338,18 +328,6 @@ function pkmnLoadFromSearch() {
       const spDef = data.stats[4].base_stat;
       const spd = data.stats[5].base_stat;
       const bst = hp + atk + def + spAtk + spDef + spd;
-
-      if (bst <= 150) {
-        $(".tier").html("D");
-      } else if (bst > 150 && bst <= 300) {
-        $(".tier").html("C");
-      } else if (bst > 3000 && bst <= 400) {
-        $(".tier").html("B");
-      } else if (bst > 400 && bst <= 600) {
-        $(".tier").html("A");
-      } else if (bst > 600 && bst <= 800) {
-        $(".tier").html("S");
-      }
 
       if (data.id < 10) {
         $("h1").html(
@@ -603,7 +581,6 @@ function pkmnLoadFromSearch() {
     $(".lore").html("");
     $(".varieties").html("");
   }
-  p = data.id;
 }
 
 function reloadMoves() {
@@ -755,9 +732,4 @@ $("body").keydown(function (e) {
   } else if (e.key == "o" && e.altKey) {
     $(".options").toggleClass("hide");
   }
-});
-
-$(".ui-autocomplete").click(function () {
-  s = document.querySelector("#autoComplete").value;
-  pkmnLoadFromSearch();
 });
