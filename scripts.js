@@ -48,7 +48,7 @@ function get() {
 }
 
 function pkmnSelect(event) {
-  // Called when a Pokémon is manually selected (Highlights the selected element)
+  // Called when a Pokémon is manually selected
   p = event.currentTarget.id;
   pkmnLoad();
 }
