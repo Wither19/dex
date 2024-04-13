@@ -114,6 +114,7 @@ h1 {
   top: 0%;
   left: 0%;
   filter: drop-shadow(black 4px 4px 10px);
+  user-select: none;
 }
 
 .art.shiny {
@@ -189,9 +190,11 @@ h1 {
 
 .bar {
   height: 28px;
-  background: var(--bs-primary);
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--bs-primary), rgb(96, 148, 226) 80%);
   color: antiquewhite;
   font-size: 16px;
+  margin: 4px 2px;
 }
 
 .other {
@@ -353,7 +356,7 @@ sub {
 }
 
 .bar.orange {
-  background: orangered;
+  background: linear-gradient(180deg, orangered, orange 95%);
 }
 
 .genus {

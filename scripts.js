@@ -168,8 +168,18 @@ function pkmnLoad() {
           (bst / 2.55) * 1.2
         }px">${bst}</div>`
       );
-      $(".height").html((data.height / 3.048).toFixed() + "'");
-      $(".weight").html((data.weight / 4.536).toFixed() + " lbs.");
+      $(".height").html(
+        (data.height / 3.048).toFixed() +
+          "' (" +
+          (data.height / 10).toFixed(1) +
+          " m)"
+      );
+      $(".weight").html(
+        (data.weight / 4.536).toFixed() +
+          " lbs. (" +
+          (data.weight / 10).toFixed(1) +
+          " kg)"
+      );
       $(".types").html("");
       $(".abilities").html("");
       for (let t = 0; t <= data.types.length; t++) {
@@ -252,6 +262,13 @@ function pkmnLoad() {
     $(".lore").html("");
     $(".varieties").html("");
   }
+  fetch(
+    "https://raw.githubusercontent.com/pkmn/ps/main/dex/data/formats-data.json"
+  )
+    .then((response) => response.json())
+    .then((t) => {
+      $(".tier").html(t["9"][p].tier);
+    });
 }
 
 function pkmnLoadFromSearch() {
@@ -458,6 +475,13 @@ function pkmnLoadFromSearch() {
     $(".lore").html("");
     $(".varieties").html("");
   }
+  fetch(
+    "https://raw.githubusercontent.com/pkmn/ps/main/dex/data/formats-data.json"
+  )
+    .then((response) => response.json())
+    .then((t) => {
+      $(".tier").html(t["9"][s].tier);
+    });
 }
 
 $(".optButton").click(function () {
