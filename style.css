@@ -99,6 +99,10 @@ body {
   left: 46%;
 }
 
+.spriteImg {
+  transform: scale(2) translate(-4px, -10px);
+}
+
 .varieties .entry img {
   transform: scale(1.35);
 }
@@ -332,8 +336,10 @@ h1 {
 
 sub {
   position: relative;
-  top: 50px;
-  bottom: -0.25em;
+  top: -4px;
+  left: 12px;
+  bottom: -0.30em;
+  font-size: 20px;
 }
 
 .lore sub {

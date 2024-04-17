@@ -67,7 +67,9 @@ function pkmnLoad() {
 
       if (data.id < 10) {
         $("h1").html(
-          `#00${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #00${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -78,11 +80,14 @@ function pkmnLoad() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       } else if (data.id >= 10 && data.id < 100) {
         $("h1").html(
-          `#0${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #0${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -93,11 +98,14 @@ function pkmnLoad() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       } else if (data.id > 10000) {
         $("h1").html(
-          `${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -108,11 +116,14 @@ function pkmnLoad() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       } else {
         $("h1").html(
-          `#${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -123,7 +134,8 @@ function pkmnLoad() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       }
       $("img.art.reg").attr(
@@ -256,18 +268,21 @@ function pkmnLoad() {
         }
       }
     });
-
   if (p >= 10001) {
     $(".genus").html("");
     $(".lore").html("");
     $(".varieties").html("");
   }
-  fetch(
-    "https://raw.githubusercontent.com/pkmn/ps/main/dex/data/formats-data.json"
-  )
+  fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
-    .then((t) => {
-      $(".tier").html(t["9"][p].tier);
+    .then((data) => {
+      fetch(
+        "https://raw.githubusercontent.com/pkmn/ps/main/dex/data/formats-data.json"
+      )
+        .then((response) => response.json())
+        .then((t) => {
+          $(".tier").html(t["9"][data.name.replace("-", "")].tier);
+        });
     });
 }
 
@@ -287,7 +302,9 @@ function pkmnLoadFromSearch() {
 
       if (data.id < 10) {
         $("h1").html(
-          `#00${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #00${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -302,7 +319,9 @@ function pkmnLoadFromSearch() {
         );
       } else if (data.id >= 10 && data.id < 100) {
         $("h1").html(
-          `#0${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #0${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -313,11 +332,14 @@ function pkmnLoadFromSearch() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       } else if (data.id > 10000) {
         $("h1").html(
-          `${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -328,13 +350,16 @@ function pkmnLoadFromSearch() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
         $(".genus").html("");
         $(".lore").html("");
       } else {
         $("h1").html(
-          `#${data.id} - ${data.name
+          `<img class="spriteImg" src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${
+            data.name
+          }.png"> #${data.id} - ${data.name
             .replace("nidoran-m", "Nidoran ♂")
             .replace("nidoran-f", "Nidoran ♀")
             .replace("-mega", " (Mega)")
@@ -345,7 +370,8 @@ function pkmnLoadFromSearch() {
             .replace("-paldea", " (Paldea)")
             .replace("-10-power-construct", " (10%)")
             .replace("-50-power-construct", " (50%)")
-            .replace("-complete", " (Complete)")}`
+            .replace("-complete", " (Complete)")
+            .replace("iron-", "iron ")}`
         );
       }
       $("img.art.reg").attr(
@@ -480,7 +506,7 @@ function pkmnLoadFromSearch() {
   )
     .then((response) => response.json())
     .then((t) => {
-      $(".tier").html(t["9"][s].tier);
+      $(".tier").html(t["9"][s.replace("-", "")].tier);
     });
 }
 
