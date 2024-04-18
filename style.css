@@ -100,7 +100,7 @@ body {
 }
 
 .spriteImg {
-  transform: scale(2) translate(-4px, -10px);
+  transform: scale(1.8) translate(-4px, -14px);
 }
 
 .varieties .entry img {
@@ -129,6 +129,10 @@ h1 {
 
 .art.hide {
   display: none;
+}
+
+.spriteImg.hide {
+  display: none
 }
 
 .hl {
@@ -176,12 +180,17 @@ h1 {
 }
 
 .stats h2 {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .height,
 .weight {
   font-size: 20px;
+}
+
+.height sub,
+.weight sub {
+  font-size: 24px;
 }
 
 .other span {
@@ -193,7 +202,7 @@ h1 {
 }
 
 .bar {
-  height: 28px;
+  height: 24px;
   border-radius: 4px;
   background: linear-gradient(180deg, var(--bs-primary), rgb(96, 148, 226) 80%);
   color: antiquewhite;
@@ -358,7 +367,9 @@ sub {
 
 .tier {
   filter: drop-shadow(3px 3px 2px gray);
-  font-size: 40px;
+  font-size: 30px;
+  position: relative;
+  top: -5px;
 }
 
 .bar.orange {
