@@ -1,5 +1,4 @@
-var dex = [
-  "bulbasaur",
+var dex = ["bulbasaur",
   "ivysaur",
   "venusaur",
   "charmander",
