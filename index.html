@@ -42,7 +42,7 @@
     <title>Pokédex</title>
   </head>
   <body onload="get();">
-    <div class="buttonGroup">
+    <div class="buttonGroup" style="display: none;">
       <button class="dexButton" style="font-size: 28px; z-index: 4;">
         Pokédex
       </button>
@@ -67,15 +67,18 @@
         autocorrect="off"
         autocomplete="off"
         autocapitalize="off"
-        maxlength="2048"
+        maxlength="24"
         tabindex="1"
         style="text-transform: capitalize; width: 400px; height: 48px; font-size: 24px;"
       />
       <br /><br />
       <h1>
-        <img class="spriteImg reg" />
-        <img class="spriteImg shiny hide" />
+        <div class="artWrapper">
+          <img class="spriteImg reg" />
+          <img class="spriteImg shiny hide" />
+        </div>
         <span></span>
+        <div class="jp"></div>
       </h1>
       <sub class="genus"></sub><br />
       <img class="art reg" src="" />
@@ -119,6 +122,8 @@
             <div class="weight"></div>
           </div>
           <div class="lore"></div>
+          <div class="genderRatio"></div>
+          <div class="genderNotif"></div>
         </div>
       </div>
     </center>
