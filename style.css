@@ -100,7 +100,7 @@ body {
 }
 
 .spriteImg {
-  transform: scale(1.8) translate(-4px, -14px);
+  transform: scale(2.5) translate(-4px, -6px);
 }
 
 .varieties .entry img {
@@ -112,8 +112,13 @@ h1 {
   font-size: 48px;
 }
 
+.jp {
+  margin: 30px auto;
+  color: gray;
+}
+
 .art {
-  width: 450px;
+  width: 400px;
   position: relative;
   top: 0%;
   left: 0%;
@@ -222,6 +227,12 @@ h1 {
 .lore {
   margin: 12px;
   line-height: 220%;
+}
+
+.genderRatio {
+  width: 200px;
+  height: 12px;
+  background: none;
 }
 
 .types {
@@ -462,7 +473,7 @@ sub {
 
 @media (max-width: 1550px) {
   .art {
-    width: 330px;
+    width: 300px;
   }
 
   .move {
