@@ -24,8 +24,8 @@ function get() {
         const pkmnName = data.pokemon_entries[i].pokemon_species.name;
 
         const spriteUrl =
-          "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/" +
-          pkmnName +
+          "https://raw.githubusercontent.com/wither19/pokerogue/main/public/images/pokemon/icons/" +
+          i +
           ".png";
 
         var newEntry = document.createElement("div");
@@ -141,40 +141,40 @@ function pkmnLoad() {
 
       $("img.spriteImg.reg").attr(
         "src",
-        `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${data.name}.png`
+        `https://raw.githubusercontent.com/wither19/pokerogue/main/public/images/pokemon/icons/${data.id}.png`
       );
 
       $("img.spriteImg.shiny").attr(
         "src",
-        `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/shiny/${data.name}.png`
+        `https://raw.githubusercontent.com/wither19/pokerogue/main/public/images/pokemon/icons/${data.id}s.png`
       );
 
       $(".hp").html(
-        `HP <div class="bar" style="width: ${(hp / 2.55) * 4}px">${hp}</div>`
+        `HP <div class="bar" style="width: ${(hp / 2.55) * 3}px">${hp}</div>`
       );
       $(".atk").html(
         `Attack <div class="bar" style="width: ${
-          (atk / 2.55) * 4
+          (atk / 2.55) * 3
         }px">${atk}</div>`
       );
       $(".def").html(
         `Defense <div class="bar" style="width: ${
-          (def / 2.55) * 4
+          (def / 2.55) * 3
         }px">${def}</div>`
       );
       $(".spAtk").html(
         `Sp. Attack <div class="bar" style="width: ${
-          (spAtk / 2.55) * 4
+          (spAtk / 2.55) * 3
         }px">${spAtk}</div>`
       );
       $(".spDef").html(
         `Sp. Defense <div class="bar" style="width: ${
-          (spDef / 2.55) * 4
+          (spDef / 2.55) * 3
         }px">${spDef}</div>`
       );
       $(".spd").html(
         `Speed <div class="bar" style="width: ${
-          (spd / 2.55) * 4
+          (spd / 2.55) * 3
         }px">${spd}</div>`
       );
       $(".bst").html(
@@ -183,10 +183,10 @@ function pkmnLoad() {
         }px">${bst}</div>`
       );
       $(".height").html(
-        (data.height / 3.048).toFixed() +
-          "' <sub>(" +
-          (data.height / 10).toFixed(1) +
-          " m)</sub>"
+        `${Math.floor((data.height * 3.937) / 12)}'${(
+          (data.height * 3.937) %
+          12
+        ).toFixed()}" <sub>(${data.height / 10} m)</sub>`
       );
       $(".weight").html(
         (data.weight / 4.536).toFixed() +
@@ -212,33 +212,29 @@ function pkmnLoad() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
-      for (let a = 0; a <= data.abilities.length; a++) {
-        if (data.abilities[a].is_hidden === true) {
-          $(".abilities").append(
-            `<br><a target="_blank" title="View ${data.abilities[
-              a
-            ].ability.name.replace(
-              "-",
-              " "
-            )} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${
-              data.abilities[a].ability.name
-            }"><span style="font-weight: 900">(H) </span>${data.abilities[
-              a
-            ].ability.name.replace("-", " ")}</a>`
-          );
-        } else {
-          $(".abilities").append(
-            `<br><a target="_blank" title="View ${data.abilities[
-              a
-            ].ability.name.replace(
-              "-",
-              " "
-            )} on Smogon" href="https://www.smogon.com/dex/sv/abilities/${
-              data.abilities[a].ability.name
-            }">${data.abilities[a].ability.name.replace("-", " ")}</a>`
-          );
-        }
-      }
+      fetch(
+        "https://raw.githubusercontent.com/pkmn/ps/main/dex/data/abilities.json"
+      )
+        .then((abi) => abi.json())
+        .then((ab) => {
+          for (let a = 0; a <= data.abilities.length; a++) {
+            if (data.abilities[a].is_hidden === true) {
+              $(".abilities").append(
+                `<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${
+                  data.abilities[a].ability.name
+                }"><span style="font-weight: 900">(H) </span>${data.abilities[
+                  a
+                ].ability.name.replace("-", " ")}</a>`
+              );
+            } else {
+              $(".abilities").append(
+                `<br><a target="_blank" href="https://www.smogon.com/dex/sv/abilities/${
+                  data.abilities[a].ability.name
+                }">${data.abilities[a].ability.name.replace("-", " ")}</a>`
+              );
+            }
+          }
+        });
     });
 
   // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
@@ -275,6 +271,8 @@ function pkmnLoad() {
     $(".lore").html("");
     $(".varieties").html("");
   }
+
+  // Fetches the Pokémon's competitive metagame
   fetch("https://pokeapi.co/api/v2/pokemon/" + p)
     .then((response) => response.json())
     .then((data) => {
@@ -285,6 +283,56 @@ function pkmnLoad() {
         .then((t) => {
           $(".tier").html(t["9"][data.name.replace("-", "")].tier);
         });
+    });
+
+  // Fetches gender ratio
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.gender_rate === -1) {
+        $(".genderRatio").css({
+          background: "lime",
+        });
+        $(".genderNotif").html(
+          '<span style="color: #82d98c">Genderless</span>'
+        );
+      } else if (data.gender_rate === 0) {
+        $(".genderRatio").css({
+          background: "#0061ff",
+        });
+        $(".genderNotif").html('<span style="color: #0061ff;">All Male</span>');
+      } else if (data.gender_rate === 8) {
+        $(".genderRatio").css({
+          background: "#fd2dde",
+        });
+        $(".genderNotif").html(
+          '<span style="color: #fd2dde;">All Female</span>'
+        );
+      } else {
+        let adjustedGR = (data.gender_rate - 8) * -1 * 12.5;
+        $(".genderRatio").css({
+          background: `linear-gradient(90deg, #0061ff ${adjustedGR}%, #fd2dde ${
+            adjustedGR + 4
+          }%)`,
+        });
+        $(".genderNotif").html(
+          `<span style="color: #0061ff;">${adjustedGR}% </span> <span>/</span> <span style="color: #fd2dde;">${
+            100 - adjustedGR
+          }%</span>`
+        );
+      }
+    });
+
+  // Iterates through names to display the Japanese name
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
+    .then((response) => response.json())
+    .then((data) => {
+      for (let j = 0; j <= data.names.length; j++) {
+        let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
+        if (fLang === 0) {
+          $(".jp").html(data.names[f].name);
+        }
+      }
     });
 }
 
@@ -380,40 +428,40 @@ function pkmnLoadFromSearch() {
 
       $("img.spriteImg.reg").attr(
         "src",
-        `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${data.name}.png`
+        `https://raw.githubusercontent.com/wither19/pokerogue/main/public/images/pokemon/icons/${data.id}.png`
       );
 
       $("img.spriteImg.shiny").attr(
         "src",
-        `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/shiny/${data.name}.png`
+        `https://raw.githubusercontent.com/wither19/pokerogue/main/public/images/pokemon/icons/${data.id}s.png`
       );
 
       $(".hp").html(
-        `HP <div class="bar" style="width: ${(hp / 2.55) * 4}px">${hp}</div>`
+        `HP <div class="bar" style="width: ${(hp / 2.55) * 3}px">${hp}</div>`
       );
       $(".atk").html(
         `Attack <div class="bar" style="width: ${
-          (atk / 2.55) * 4
+          (atk / 2.55) * 3
         }px">${atk}</div>`
       );
       $(".def").html(
         `Defense <div class="bar" style="width: ${
-          (def / 2.55) * 4
+          (def / 2.55) * 3
         }px">${def}</div>`
       );
       $(".spAtk").html(
         `Sp. Attack <div class="bar" style="width: ${
-          (spAtk / 2.55) * 4
+          (spAtk / 2.55) * 3
         }px">${spAtk}</div>`
       );
       $(".spDef").html(
         `Sp. Defense <div class="bar" style="width: ${
-          (spDef / 2.55) * 4
+          (spDef / 2.55) * 3
         }px">${spDef}</div>`
       );
       $(".spd").html(
         `Speed <div class="bar" style="width: ${
-          (spd / 2.55) * 4
+          (spd / 2.55) * 3
         }px">${spd}</div>`
       );
       $(".bst").html(
@@ -422,10 +470,10 @@ function pkmnLoadFromSearch() {
         }px">${bst}</div>`
       );
       $(".height").html(
-        (data.height / 3.048).toFixed() +
-          "' <sub>(" +
-          (data.height / 10).toFixed(1) +
-          " m)</sub>"
+        `${Math.floor((data.height * 3.937) / 12)}'${(
+          (data.height * 3.937) %
+          12
+        ).toFixed()}" <sub>(${data.height / 10} m)</sub>`
       );
       $(".weight").html(
         (data.weight / 4.536).toFixed() +
@@ -522,6 +570,54 @@ function pkmnLoadFromSearch() {
     .then((response) => response.json())
     .then((t) => {
       $(".tier").html(t["9"][s.replace("-", "")].tier);
+    });
+
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.gender_rate === -1) {
+        $(".genderRatio").css({
+          background: "lime",
+        });
+        $(".genderNotif").html(
+          '<span style="color: #82d98c">Genderless</span>'
+        );
+      } else if (data.gender_rate === 0) {
+        $(".genderRatio").css({
+          background: "#0061ff",
+        });
+        $(".genderNotif").html('<span style="color: #0061ff;">All Male</span>');
+      } else if (data.gender_rate === 8) {
+        $(".genderRatio").css({
+          background: "#fd2dde",
+        });
+        $(".genderNotif").html(
+          '<span style="color: #fd2dde;">All Female</span>'
+        );
+      } else {
+        let adjustedGR = (data.gender_rate - 8) * -1 * 12.5;
+        $(".genderRatio").css({
+          background: `linear-gradient(90deg, #0061ff ${adjustedGR}%, #fd2dde ${
+            adjustedGR + 4
+          }%)`,
+        });
+        $(".genderNotif").html(
+          `<span style="color: #0061ff;">${adjustedGR}% </span> <span>/</span> <span style="color: #fd2dde;">${
+            100 - adjustedGR
+          }%</span>`
+        );
+      }
+    });
+
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
+    .then((response) => response.json())
+    .then((data) => {
+      for (let j = 0; j <= data.names.length; j++) {
+        let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
+        if (fLang === 0) {
+          $(".jp").html(data.names[f].name);
+        }
+      }
     });
 }
 
