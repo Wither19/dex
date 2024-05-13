@@ -225,8 +225,10 @@ h1 {
 }
 
 .lore {
-  margin: 12px;
-  line-height: 220%;
+  margin: 24px;
+  line-height: 190%;
+  font-size: 20px;
+  font-style: italic;
 }
 
 .genderRatio {
@@ -469,6 +471,10 @@ sub {
 .ui-widget textarea,
 .ui-widget button {
   font-family: 'Lato', sans-serif !important;
+}
+
+#cry {
+  display: block;
 }
 
 @media (max-width: 1550px) {
