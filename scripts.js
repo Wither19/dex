@@ -50,6 +50,10 @@ function get() {
 function pkmnSelect(event) {
   // Called when a Pokémon is manually selected
   p = event.currentTarget.id;
+  $("#cry").attr(
+    "src",
+    `https://github.com/PokeAPI/cries/raw/main/cries/pokemon/latest/${data.id}.ogg`
+  );
   pkmnLoad();
 }
 // Actually loads the Pokémon and all relevant data from the Pokédex number (as expressed by p) being changed
@@ -237,24 +241,6 @@ function pkmnLoad() {
         });
     });
 
-  // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
-  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
-    .then((response) => response.json())
-    .then((data) => {
-      for (let f = 0; f <= data.flavor_text_entries.length; f++) {
-        let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
-        if (fLang === 0) {
-          $(".lore").html(
-            `<span style="font-style: italic;">"${
-              data.flavor_text_entries[f].flavor_text
-            }"</span><br><br><sub style="text-transform: capitalize;">Pokémon ${data.flavor_text_entries[
-              f
-            ].version.name.replace("-", " ")}</sub>`
-          );
-        }
-      }
-    });
-
   // Finds the English genus
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
     .then((response) => response.json())
@@ -322,25 +308,44 @@ function pkmnLoad() {
         );
       }
     });
-
-  // Iterates through names to display the Japanese name
-  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
+  // Fetches the Pokémon species endpoint for p and iterates through its Pokédex entries to find the most recent English entry
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
     .then((response) => response.json())
     .then((data) => {
-      for (let j = 0; j <= data.names.length; j++) {
-        let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
-        if (fLang === 0) {
-          $(".jp").html(data.names[f].name);
-        }
-      }
+      let eng = data.flavor_text_entries.find(
+        (ent) =>
+          (ent.language.name === "en" && ent.version.name === "x") ||
+          (ent.language.name === "en" && ent.version.name === "ultra-sun") ||
+          (ent.language.name === "en" && ent.version.name === "sword") ||
+          (ent.language.name === "en" &&
+            ent.version.name === "legends-arceus") ||
+          (ent.language.name === "en" && ent.version.name === "scarlet")
+      ).flavor_text;
+      $(".lore").html(eng);
     });
 }
+
+// Iterates through names to display the Japanese name
+fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
+  .then((response) => response.json())
+  .then((data) => {
+    for (let j = 0; j <= data.names.length; j++) {
+      let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
+      if (fLang === 0) {
+        $(".jp").html(data.names[f].name);
+      }
+    }
+  });
 
 function pkmnLoadFromSearch() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + s)
     .then((response) => response.json())
     .then((data) => {
       p = data.id;
+      $("#cry").attr(
+        "src",
+        `https://github.com/PokeAPI/cries/raw/main/cries/pokemon/latest/${data.id}.ogg`
+      );
       document.querySelector("#autoComplete").value = "";
       const hp = data.stats[0].base_stat;
       const atk = data.stats[1].base_stat;
@@ -530,24 +535,6 @@ function pkmnLoadFromSearch() {
       }
     });
 
-  // Fetches the Pokémon species endpoint for s and iterates through its Pokédex entries to find the most recent English entry
-  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
-    .then((response) => response.json())
-    .then((data) => {
-      for (let f = 0; f <= data.flavor_text_entries.length; f++) {
-        let fLang = data.flavor_text_entries[f].language.name.lastIndexOf("en");
-        if (fLang === 0) {
-          $(".lore").html(
-            `<span style="font-style: italic;">"${
-              data.flavor_text_entries[f].flavor_text
-            }"</span><br><br><sub style="text-transform: capitalize;">Pokémon ${data.flavor_text_entries[
-              f
-            ].version.name.replace("-", " ")}</sub>`
-          );
-        }
-      }
-    });
-
   // Finds the English genus
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
     .then((response) => response.json())
@@ -618,6 +605,24 @@ function pkmnLoadFromSearch() {
           $(".jp").html(data.names[f].name);
         }
       }
+    });
+
+  // Fetches the Pokémon species endpoint for s and iterates through its Pokédex entries to find the most recent English entry
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
+    .then((response) => response.json())
+    .then((data) => {
+      let eng = data.flavor_text_entries.find(
+        (ent) =>
+          (
+            (ent.language.name === "en" && ent.version.name === "x") ||
+            (ent.language.name === "en" && ent.version.name === "ultra-sun") ||
+            (ent.language.name === "en" && ent.version.name === "sword") ||
+            (ent.language.name === "en" &&
+              ent.version.name === "legends-arceus") ||
+            (ent.language.name === "en" && ent.version.name === "scarlet")
+          ).flavor_text
+      );
+      $(".lore").html(eng);
     });
 }
 
