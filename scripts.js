@@ -312,30 +312,22 @@ function pkmnLoad() {
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
     .then((response) => response.json())
     .then((data) => {
-      let eng = data.flavor_text_entries.find(
-        (ent) =>
-          (ent.language.name === "en" && ent.version.name === "x") ||
-          (ent.language.name === "en" && ent.version.name === "ultra-sun") ||
-          (ent.language.name === "en" && ent.version.name === "sword") ||
-          (ent.language.name === "en" &&
-            ent.version.name === "legends-arceus") ||
-          (ent.language.name === "en" && ent.version.name === "scarlet")
-      ).flavor_text;
-      $(".lore").html(eng);
+      const english = data.flavor_text_entries.findLast(
+        (entry) => entry.language.name === "en"
+      );
+      $(".lore").html(english.flavor_text);
+    });
+
+  // Iterates through names to display the Japanese name
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
+    .then((response) => response.json())
+    .then((data) => {
+      const japanese = data.names.findLast(
+        (jp) => jp.language.name === "ja-Hrkt"
+      );
+      $(".jp").html(jp.name);
     });
 }
-
-// Iterates through names to display the Japanese name
-fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
-  .then((response) => response.json())
-  .then((data) => {
-    for (let j = 0; j <= data.names.length; j++) {
-      let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
-      if (fLang === 0) {
-        $(".jp").html(data.names[f].name);
-      }
-    }
-  });
 
 function pkmnLoadFromSearch() {
   fetch("https://pokeapi.co/api/v2/pokemon/" + s)
@@ -596,33 +588,23 @@ function pkmnLoadFromSearch() {
       }
     });
 
-  fetch("https://pokeapi.co/api/v2/pokemon-species/" + p)
+  fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
     .then((response) => response.json())
     .then((data) => {
-      for (let j = 0; j <= data.names.length; j++) {
-        let fLang = data.names[f].language.name.indexOf("ja-Hrkt");
-        if (fLang === 0) {
-          $(".jp").html(data.names[f].name);
-        }
-      }
+      const japanese = data.names.findLast(
+        (jp) => jp.language.name === "ja-Hrkt"
+      );
+      $(".jp").html(jp.name);
     });
 
   // Fetches the Pokémon species endpoint for s and iterates through its Pokédex entries to find the most recent English entry
   fetch("https://pokeapi.co/api/v2/pokemon-species/" + s)
     .then((response) => response.json())
     .then((data) => {
-      let eng = data.flavor_text_entries.find(
-        (ent) =>
-          (
-            (ent.language.name === "en" && ent.version.name === "x") ||
-            (ent.language.name === "en" && ent.version.name === "ultra-sun") ||
-            (ent.language.name === "en" && ent.version.name === "sword") ||
-            (ent.language.name === "en" &&
-              ent.version.name === "legends-arceus") ||
-            (ent.language.name === "en" && ent.version.name === "scarlet")
-          ).flavor_text
+      const english = data.flavor_text_entries.findLast(
+        (entry) => entry.language.name === "en"
       );
-      $(".lore").html(eng);
+      $(".lore").html(english.flavor_text);
     });
 }
 
